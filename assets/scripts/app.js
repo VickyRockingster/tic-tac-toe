@@ -5,6 +5,7 @@
 
 // use require without a reference to ensure a file is bundled
 // require('./example')
+const myTurn = () => {}
 
 $(() => {
   // your JS code goes here

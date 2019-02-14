@@ -1,5 +1,13 @@
 @import '~bootstrap/scss/bootstrap';
 
+button {
+  background-color: red // make another warm color(hexadecimal)
+}
+
+error {
+  color: red // change to hexadecimal
+}
+
 h1 {
   margin: 10px auto;
   text-align: center;
