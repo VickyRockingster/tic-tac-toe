@@ -14,19 +14,53 @@
     <body>
       <header>
         <nav>
-          <button class="sign-in">Sign In</button>
-          <button class="log-in">Log In</button>
-          <button class="sign-out">Sign Out</button>
-          <button class="account">Account</button>
+          <h3>SIGN UP</h3>
+          <form id="sign-up">
+            <label for="signup-email">Email</label>
+            <input name="credentials[email]" type="text" placeholder="Email">
+            <label for="signup-password">Password</label>
+            <input name="credentials[password]" type="password" placeholder="Password">
+            <label for="signup-email">Password Confirmation</label>
+            <input name="credentials[password_conformation]" type="password" placeholder="Confirn Password">
+            <button type="submit" value="Sign Up">Sign Up</button>
+          </form>
+          <h3>SIGN IN</h3>
+          <form id="sign-in">
+            <label for="signin-email">Email</label>
+            <input name="credentials[email]" type="text" placeholder="Email">
+            <label for="signin-password">Password</label>
+            <input name="credentials[password]" type="password" placeholder="Password">
+            <button type="submit" value="Sign In">Sign In</button>
+          </form>
+          <h3>SIGN OUT</h3>
+          <form id="sign-out">
+            <button type="submit" value="Sign Out">Sign Out</button>
+          </form>
+          <h3>ACCOUNT</h3>
+          <form id="account">
+            <button type="submit" value="Account">Account</button>
+          </form>
         </nav>
         <h1>Tic-Tac-Toe</h1>
       </header>
-      <main>
+      <main class="container">
         <div id="user-feedback"></div>
-        <div id="grid-row-one"></div>
-        <div id="grid-row-two"></div>
-        <div id="grid-row-three"></div>
-        <button>RESET</button>
+        <div class="row" id="grid-row-one">
+          <div class="box col-4" id="1"></div>
+          <div class="box col-4" id="2">2</div>
+          <div class="box col-4" id="3">3</div>
+        </div>
+        <div class="row" id="grid-row-two">
+          <div class="box col-4" id="4">4</div>
+          <div class="box col-4" id="5">5</div>
+          <div class="box col-4" id="6">6</div>
+        </div>
+        <div class="row" id="grid-row-three">
+          <div class="box col-4" id="7">7</div>
+          <div class="box col-4" id="8">8</div>
+          <div class="box col-4" id="9">9</div>
+        </div>
+        <button type="submit" id="reset">RESET</button>
       </main>
     </body>
 </html>

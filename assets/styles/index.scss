@@ -1,5 +1,8 @@
 @import '~bootstrap/scss/bootstrap';
 
+$basic-background-color: #ffffff;
+$box-dimension: 150px;
+
 button {
   background-color: red // make another warm color(hexadecimal)
 }
@@ -11,4 +14,26 @@ error {
 h1 {
   margin: 10px auto;
   text-align: center;
+}
+
+.box {
+  border: 5px solid black;
+  height: $box-dimension;
+  margin: 0;
+  padding: 0;
+  width: $box-dimension;
+}
+
+.turn-red {
+  background: red;
+}
+
+.turn-blue {
+  background: blue;
+}
+
+
+.turn-x,
+.turn-o {
+  background: $basic-background-color;
 }
