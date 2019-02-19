@@ -1,63 +1,76 @@
 const ui = require('./ui.js')
 const api = require('./api.js')
 
-function myTurn (event) {
-  event.preventDefault()
+let counter = 1
 
-  const counter = 0
+const clickTracker = function () {
+  counter += 1
+  return counter
+}
+
+const onRedTurn = function (event) {
+  $(event.target).addClass('turn-red')
+}
+const onBlueTurn = function (event) {
+  $(event.target).addClass('turn-blue')
+}
+
+const turnX = function (event) {
+  // onRedTurn(event)
+  $(event.target).addClass('turn-red')
+  $(event.target).html('X')
+  console.log('turnX was called!')
+}
+
+const turnO = function (event) {
+  // onBlueTurn(event)
+  $(event.target).addClass('turn-blue')
+  $(event.target).html('O')
+  console.log('turnO was called!')
+}
+
+const whoseTurn = function () {
+  event.preventDefault()
+  // console.log(`${counter} in the whose turn function`)
   if (counter % 2 === 1) {
-    turnX()
-  } else if (counter % 2 === 0 && counter !== 0) {
-    turnO()
+    return true // now it's x's turn
+  } else {
+    return false // now it's o's turn
   }
 }
 
-const turnX = (event) => {
+const onMouseover = (event) => {
+  whoseTurn() ? onRedTurn(event) : onBlueTurn(event)
+}
+
+const onMouseout = (event) => {
+  $(event.target).removeClass('turn-red')
+  $(event.target).removeClass('turn-blue')
+}
+
+const onClick = (event) => {
+  whoseTurn() ? turnX(event) : turnO(event)
+  clickTracker()
+}
+// onMouseover - access those turn it is via clicktracker
+// onClick
+const clearBoard = (event) => {
   event.preventDefault()
-  if (event === 'mouseover') {
-    $('.box').addClass('turn-red')
-  } else if (event === 'click') {
-    let counter = 1
-    $('.box').addClass('turn-x')
-    $('.box').setAttribute('src', '#')
-    counter += 1
-  }
+  console.log('clearBoard was called!')
+  $('.box').html('')
+  $('.box').removeClass('turn-red')
+  $('.box').removeClass('turn-blue')
+  counter = 0
 }
-const turnO = (event) => {
-  event.preventDefault()
-  if (event === 'mouseover') {
-    $('.box').addClass('turn-blue')
-  } else if (event === 'click') {
-    let counter = 1
-    $('.box').addClass('turn-o')
-    $('.box').setAttribute('src', '#')
-    counter += 1
-  }
-}
-
-const clearBoard = () => {}
-
-// const createGameGrid = () => {
-//   const gridRow1 = [null, null, null]
-//   const gridRow2 = [null, null, null]
-//   const gridRow3 = [null, null, null]
-//
-//   const addGridRows = (array, id) => {
-//     for (let i = 0; i < array.length; i++) {
-//       const gridBox = document.createElement('div')
-//       gridBox.setAttribute('box-id', i)
-//       gridBox.addEventListener('click', myTurn)
-//       document.getElementById('id').appendChild(gridBox)
-//     }
-//   }
-//   addGridRows(gridRow1, 'grid-row-one')
-//   addGridRows(gridRow2, 'grid-row-two')
-//   addGridRows(gridRow3, 'grid-row-three')
-
-//   const grid = gridRow1.concat(gridRow2).concat(gridRow3)
-// }
 
 module.exports = {
-  myTurn,
+  turnX,
+  turnO,
+  whoseTurn,
+  onBlueTurn,
+  onRedTurn,
+  onMouseover,
+  onMouseout,
+  onClick,
   clearBoard
 }

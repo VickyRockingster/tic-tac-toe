@@ -9,8 +9,9 @@ const authEvents = require('./authenticate/events.js')
 // require('./example')
 
 $(() => {
-  $('#sign-up').on('submit', authEvents.onSignUp)
-  $('.box').on('mouseover', events.myTurn)
-  $('.box').on('click', events.myTurn)
-  $('#reset').on('submit', events.clearBoard)
+  $(authEvents.addHandlers)
+  $('.box').on('mouseover', events.onMouseover)
+  $('.box').on('mouseout', events.onMouseout)
+  $('.box').on('click', events.onClick)
+  $('#clear-board').on('click', events.clearBoard)
 })
