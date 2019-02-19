@@ -9,7 +9,7 @@ const authEvents = require('./authenticate/events.js')
 // require('./example')
 
 $(() => {
-  $(authEvents.addHandlers)
+  authEvents.addHandlers()
   $('.box').on('mouseover', events.onMouseover)
   $('.box').on('mouseout', events.onMouseout)
   $('.box').on('click', events.onClick)

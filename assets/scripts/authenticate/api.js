@@ -1,4 +1,5 @@
 const config = require('../config.js')
+const store = require('../store.js')
 
 const signUp = function (credentials) {
   return $.ajax({
@@ -8,6 +9,47 @@ const signUp = function (credentials) {
   })
 }
 
+const signIn = function (credentials) {
+  return $.ajax({
+    url: config.apiUrl + '/sign-in',
+    method: 'POST',
+    data: credentials
+  })
+}
+
+const signOut = function (credentials) {
+  return $.ajax({
+    url: config.apiUrl + '/sign-out',
+    method: 'DELETE',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
+const changePassword = function (credentials) {
+  return $.ajax({
+    url: config.apiUrl + '/sign-out',
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    passwords: credentials
+  })
+}
+
+// const accountInfo = function (credentials) {
+//   return $.ajax({
+//     url: config.apiUrl + '/sign-in',
+//     method: 'GET',
+//     data: credentials
+//   })
+// }
+
 module.exports = {
-  signUp
+  signUp,
+  signIn,
+  signOut,
+  changePassword
+  // accountInfo
 }
