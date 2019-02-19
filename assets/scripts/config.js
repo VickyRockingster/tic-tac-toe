@@ -2,7 +2,7 @@
 
 let apiUrl
 const apiUrls = {
-  production: 'https://wdi-library-api.herokuapp.com',
+  production: 'https://tic-tac-toe-wdi.herokuapp.com',
   development: 'https://wdi-library-api.herokuapp.com'
 }
 
