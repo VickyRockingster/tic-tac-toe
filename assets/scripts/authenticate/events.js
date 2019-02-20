@@ -21,9 +21,6 @@ const onSignIn = (event) => {
   authApi.signIn(data)
     .then(authUi.signInSuccess)
     .catch(authUi.failure)
-  $('nav').removeClass('hidden')
-  $('main').removeClass('hidden')
-  $('section').addClass('hidden')
   console.log('I ran the onSignIn function')
 }
 

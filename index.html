@@ -24,7 +24,7 @@
         <h1>Tic-Tac-Toe</h1>
       </header>
         <div class="user-feedback"></div>
-        <section>
+        <section class="front-page">
           <h3 class="sign-up">SIGN UP</h3>
           <form id="sign-up">
             <label for="signup-email">Email</label>
@@ -62,6 +62,17 @@
         </div>
         <button type="button" id="clear-board">RESET</button>
       </main>
+      <section class="account hidden">
+        <h3>CHANGE PASSWORD</h3>
+        <form id="change-password">
+          <label class="email">''</label>
+          <label for="signup-password">Old Password</label>
+          <input name="passwords[old]" type="password" placeholder="Old Password">
+          <label for="signup-email">New Password</label>
+          <input name="passwords[new]" type="password" placeholder="New Password">
+          <button type="submit" value="Change Password">Submit</button>
+        </form>
+      </section>
     </body>
 </html>
 

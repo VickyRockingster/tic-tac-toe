@@ -32,14 +32,14 @@ const createGame = () => {
   })
 }
 
-const updateGame = (ID, gameDelta) => {
+const updateGame = (ID, newMove) => {
   return $.ajax({
     url: config.apiUrl + `/games/${ID}`,
     method: 'PATCH',
     headers: {
       Authorization: 'Token token=' + store.user.token
     },
-    data: gameDelta
+    data: newMove
   })
 }
 

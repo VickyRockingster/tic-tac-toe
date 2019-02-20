@@ -1,16 +1,7 @@
 const ui = require('./ui.js')
 const api = require('./api.js')
 const getFormFields = require('../../../lib/get-form-fields.js')
-
-const winArray = [
-  [0, 1, 2],
-  [3, 4, 5],
-  [6, 7, 8],
-  [0, 3, 6],
-  [1, 4, 7],
-  [2, 5, 8],
-  [0, 4, 8],
-  [6, 4, 2]]
+const store = require('../store.js')
 
 const onGetGames = function (event) {
   event.preventDefault()
@@ -22,24 +13,71 @@ const onGetGames = function (event) {
 
 const onGetGame = function (event) {
   event.preventDefault()
-  const data = getFormFields(event.target)
-  api.getGame(data.game.id)
+  api.getGame(store.game.id)
     .then(ui.getGameSuccess)
     .catch(ui.failure)
 }
 
+const showAccountPage = function (event) {
+  event.preventDefault()
+  const email = store.user.email
+  // const games = store.games
+  $('.account').removeClass('hidden')
+  $('main').addClass('hidden')
+  $('.email').html('Email: ' + email)
+  $('.email').addClass('header')
+}
+
 const onCreateGame = function (event) {
   event.preventDefault()
-  const data = getFormFields(event.target)
-  api.createGame(data.game)
+  api.createGame()
     .then(ui.createGameSuccess)
     .catch(ui.failure)
 }
 
+const didYouWin = function (gameArray) {
+  switch (gameArray) {
+    case gameArray[0] === gameArray[1] === gameArray[2]:
+      gameArray[0] ? $('h1').html('X Wins!') : $('h1').html('O Wins!')
+      return true
+    case gameArray[3] === gameArray[4] === gameArray[5]:
+      gameArray[3] ? $('h1').html('X Wins!') : $('h1').html('O Wins!')
+      return true
+    case gameArray[6] === gameArray[7] === gameArray[8]:
+      gameArray[6] ? $('h1').html('X Wins!') : $('h1').html('O Wins!')
+      return true
+    case gameArray[0] === gameArray[3] === gameArray[6]:
+      gameArray[0] ? $('h1').html('X Wins!') : $('h1').html('O Wins!')
+      return true
+    case gameArray[1] === gameArray[4] === gameArray[7]:
+      gameArray[1] ? $('h1').html('X Wins!') : $('h1').html('O Wins!')
+      return true
+    case gameArray[2] === gameArray[5] === gameArray[8]:
+      gameArray[2] ? $('h1').html('X Wins!') : $('h1').html('O Wins!')
+      return true
+    case gameArray[0] === gameArray[4] === gameArray[8]:
+      gameArray[0] ? $('h1').html('X Wins!') : $('h1').html('O Wins!')
+      return true
+    case gameArray[6] === gameArray[4] === gameArray[2]:
+      gameArray[6] ? $('h1').html('X Wins!') : $('h1').html('O Wins!')
+      return true
+  }
+}
+
 const onUpdateGame = function (event) {
   event.preventDefault()
-  const data = getFormFields(event.target)
-  api.updateGame(data.game.id)
+  const gameEleIndex = $(event.target).attr('id')
+  const gameEleValue = $(event.target).html()
+  const newMove = {
+    'game': {
+      'cell': {
+        'index': gameEleIndex,
+        'value': gameEleValue
+      },
+      'over': didYouWin(store.game.cells)
+    }
+  }
+  api.updateGame(store.game.id, newMove)
     .then(ui.updateGameSuccess)
     .catch(ui.failure)
 }
@@ -72,33 +110,39 @@ const whoseTurn = function () {
   event.preventDefault()
   // console.log(`${counter} in the whose turn function`)
   if (counter % 2 === 1) {
-    return true // now it's x's turn
+    return true
   } else {
-    return false // now it's o's turn
+    return false
   }
 }
 
 const onMouseover = (event) => {
+  event.preventDefault()
   whoseTurn() ? onRedTurn(event) : onBlueTurn(event)
 }
 
 const onMouseout = (event) => {
+  event.preventDefault()
   $(event.target).removeClass('turn-red')
   $(event.target).removeClass('turn-blue')
 }
 
-const onClick = (event) => {
-  if (counter % 2 === 1) {
-    api.createGame()
+const validMove = (event) => {
+  if (counter === 1) {
+    onCreateGame(event)
+    turnX(event)
+    clickTracker()
+    onUpdateGame(event)
   } else {
-    api.updateGame()
+    whoseTurn() ? turnX(event) : turnO(event)
+    clickTracker()
+    onUpdateGame(event)
   }
-  whoseTurn() ? turnX(event) : turnO(event)
-  clickTracker()
 }
 
-const invalidMove = function (event) {
-  $(event.target).html() !== null ? onClick(event) : ui.failure()
+const onClick = function (event) {
+  event.preventDefault()
+  $(event.target).html() === '' ? validMove(event) : ui.failure()
 }
 
 const clearBoard = (event) => {
@@ -107,6 +151,8 @@ const clearBoard = (event) => {
   $('.box').removeClass('turn-red')
   $('.box').removeClass('turn-blue')
   counter = 0
+  store.game.over = true
+  onUpdateGame(event)
 }
 
 module.exports = {
@@ -122,6 +168,7 @@ module.exports = {
   onMouseover,
   onMouseout,
   onClick,
-  invalidMove,
-  clearBoard
+  validMove,
+  clearBoard,
+  showAccountPage
 }
