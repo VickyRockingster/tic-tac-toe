@@ -3,20 +3,20 @@ const api = require('./api.js')
 const getFormFields = require('../../../lib/get-form-fields.js')
 const store = require('../store.js')
 
-const onGetGames = function (event) {
-  event.preventDefault()
-  const data = getFormFields(event.target)
-  api.getGames(data.game)
-    .then(ui.getGamesSuccess)
-    .catch(ui.failure)
-}
-
-const onGetGame = function (event) {
-  event.preventDefault()
-  api.getGame(store.game.id)
-    .then(ui.getGameSuccess)
-    .catch(ui.failure)
-}
+// const onGetGames = function (event) {
+//   event.preventDefault()
+//   const data = getFormFields(event.target)
+//   api.getGames(data.game)
+//     .then(ui.getGamesSuccess)
+//     .catch(ui.failure)
+// }
+//
+// const onGetGame = function (event) {
+//   event.preventDefault()
+//   api.getGame(store.game.id)
+//     .then(ui.getGameSuccess)
+//     .catch(ui.failure)
+// }
 
 const showAccountPage = function (event) {
   event.preventDefault()
@@ -26,13 +26,6 @@ const showAccountPage = function (event) {
   $('main').addClass('hidden')
   $('.email').html('Email: ' + email)
   $('.email').addClass('header')
-}
-
-const onCreateGame = function (event) {
-  event.preventDefault()
-  api.createGame()
-    .then(ui.createGameSuccess)
-    .catch(ui.failure)
 }
 
 const didYouWin = function (gameArray) {
@@ -62,6 +55,13 @@ const didYouWin = function (gameArray) {
       gameArray[6] ? $('h1').html('X Wins!') : $('h1').html('O Wins!')
       return true
   }
+}
+
+const onCreateGame = function (event) {
+  event.preventDefault()
+  api.createGame()
+    .then(ui.createGameSuccess)
+    .catch(ui.failure)
 }
 
 const onUpdateGame = function (event) {
@@ -142,7 +142,7 @@ const validMove = (event) => {
 
 const onClick = function (event) {
   event.preventDefault()
-  $(event.target).html() === '' ? validMove(event) : ui.failure()
+  $(event.target).html() !== 'X' && $(event.target).html() !== 'O' ? validMove(event) : ui.failure()
 }
 
 const clearBoard = (event) => {
@@ -156,8 +156,8 @@ const clearBoard = (event) => {
 }
 
 module.exports = {
-  onGetGames,
-  onGetGame,
+  // onGetGames,
+  // onGetGame,
   onCreateGame,
   onUpdateGame,
   turnX,
