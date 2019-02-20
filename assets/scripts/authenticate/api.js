@@ -27,14 +27,14 @@ const signOut = function (credentials) {
   })
 }
 
-const changePassword = function (credentials) {
+const changePassword = function (passwords) {
   return $.ajax({
     url: config.apiUrl + '/sign-out',
     method: 'PATCH',
     headers: {
       Authorization: 'Token token=' + store.user.token
     },
-    passwords: credentials
+    data: passwords
   })
 }
 

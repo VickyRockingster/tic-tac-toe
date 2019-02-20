@@ -34,8 +34,23 @@ const onSignOut = (event) => {
   authApi.signOut(data)
     .then(authUi.signOutSuccess)
     .catch(authUi.failure)
+<<<<<<< Updated upstream
 
   console.log('all my code is finished')
+=======
+  console.log('I ran the onSignOut function')
+}
+
+const onChangePassword = (event) => {
+  event.preventDefault()
+  const passwords = getFormFields(event.target)
+  console.log(passwords)
+
+  authApi.changePassword(passwords)
+    .then(authUi.changePasswordSuccess)
+    .catch(authUi.failure)
+  console.log('I ran the onChangePassword function')
+>>>>>>> Stashed changes
 }
 
 // const onChangePassword = () => {
@@ -54,6 +69,7 @@ const addHandlers = function () {
   $('#sign-up').on('submit', onSignUp)
   $('#sign-in').on('submit', onSignIn)
   $('#sign-out').on('submit', onSignOut)
+  $('#change-password').on('submit', onChangePassword)
 }
 
 module.exports = {
