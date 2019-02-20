@@ -1,7 +1,13 @@
-// const api = require('./api.js')
+const store = require('../store.js')
 
-const updateGameSuccess = function (responseData) {
-// const game = responseData.game
+const getGamesSuccess = function () {}
+
+const getGameSuccess = function () {}
+
+const createGameSuccess = function () {}
+
+const updateGameSuccess = function (data) {
+  const game = store.data
   // const bookHtml = (`
   //   <h2>Title: ${book.title}</h2>
   //   <h3>Author: ${book.author}</h3>
@@ -16,10 +22,13 @@ const failure = function () {
   setTimeout(() => {
     $('#user-feedback').html('')
     $('#user-feedback').removeClass('error')
-  }, 5000)
+  }, 3000)
 }
 
 module.exports = {
+  getGamesSuccess,
+  getGameSuccess,
+  createGameSuccess,
   updateGameSuccess,
   failure
 }

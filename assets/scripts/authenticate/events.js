@@ -10,8 +10,7 @@ const onSignUp = (event) => {
   authApi.signUp(data)
     .then(authUi.signUpSuccess)
     .catch(authUi.failure)
-
-  console.log('all my code is finished')
+  console.log('I ran the onSignUp function')
 }
 
 const onSignIn = (event) => {
@@ -22,8 +21,10 @@ const onSignIn = (event) => {
   authApi.signIn(data)
     .then(authUi.signInSuccess)
     .catch(authUi.failure)
-
-  console.log('all my code is finished')
+  $('nav').removeClass('hidden')
+  $('main').removeClass('hidden')
+  $('section').addClass('hidden')
+  console.log('I ran the onSignIn function')
 }
 
 const onSignOut = (event) => {
@@ -34,8 +35,18 @@ const onSignOut = (event) => {
   authApi.signOut(data)
     .then(authUi.signOutSuccess)
     .catch(authUi.failure)
+  console.log('I ran the onSignOut function')
+}
 
-  console.log('all my code is finished')
+const onChangePassword = (event) => {
+  event.preventDefault()
+  const data = getFormFields(event.target)
+  console.log(data)
+
+  authApi.changePassword(data)
+    .then(authUi.changePasswordSuccess)
+    .catch(authUi.failure)
+  console.log('I ran the onChangePassword function')
 }
 
 // const onChangePassword = () => {

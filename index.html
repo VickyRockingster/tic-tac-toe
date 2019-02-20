@@ -13,8 +13,19 @@
     </head>
     <body>
       <header>
-        <nav>
-          <h3>SIGN UP</h3>
+        <nav class="hidden">
+          <form id="sign-out">
+           <button type="submit" value="Sign Out">Sign Out</button>
+          </form>
+          <form id="account">
+            <button type="submit" value="Account">Account</button>
+          </form>
+        </nav>
+        <h1>Tic-Tac-Toe</h1>
+      </header>
+        <div class="user-feedback"></div>
+        <section>
+          <h3 class="sign-up">SIGN UP</h3>
           <form id="sign-up">
             <label for="signup-email">Email</label>
             <input name="credentials[email]" type="text" placeholder="Email">
@@ -32,33 +43,22 @@
             <input name="credentials[password]" type="password" placeholder="Password">
             <button type="submit" value="Sign In">Sign In</button>
           </form>
-          <h3>SIGN OUT</h3>
-          <form id="sign-out">
-            <button type="submit" value="Sign Out">Sign Out</button>
-          </form>
-          <h3>ACCOUNT</h3>
-          <form id="account">
-            <button type="submit" value="Account">Account</button>
-          </form>
-        </nav>
-        <h1>Tic-Tac-Toe</h1>
-      </header>
-      <main class="container">
-        <div id="user-feedback"></div>
-        <div class="row" id="grid-row-one">
+      </section>
+      <main class="container hidden">
+        <div class="row">
+          <div class="box col-4" id="0"></div>
           <div class="box col-4" id="1"></div>
           <div class="box col-4" id="2"></div>
-          <div class="box col-4" id="3"></div>
         </div>
-        <div class="row" id="grid-row-two">
+        <div class="row">
+          <div class="box col-4" id="3"></div>
           <div class="box col-4" id="4"></div>
           <div class="box col-4" id="5"></div>
-          <div class="box col-4" id="6"></div>
         </div>
-        <div class="row" id="grid-row-three">
+        <div class="row">
+          <div class="box col-4" id="6"></div>
           <div class="box col-4" id="7"></div>
           <div class="box col-4" id="8"></div>
-          <div class="box col-4" id="9"></div>
         </div>
         <button type="button" id="clear-board">RESET</button>
       </main>

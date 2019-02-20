@@ -12,6 +12,6 @@ $(() => {
   authEvents.addHandlers()
   $('.box').on('mouseover', events.onMouseover)
   $('.box').on('mouseout', events.onMouseout)
-  $('.box').on('click', events.onClick)
+  $('.box').on('click', events.invalidMove)
   $('#clear-board').on('click', events.clearBoard)
 })

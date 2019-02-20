@@ -9,13 +9,12 @@ const signInSuccess = function (data) {
   $('#user-feedback').text('You have successfully signed in!')
   $('#sign-in').trigger('reset')
   store.user = data.user
-  console.log(store.user)
 }
 
 const signOutSuccess = function (data) {
   $('#user-feedback').text('You have successfully signed out!')
   $('#sign-out').trigger('reset')
-  // store.user = null
+  store.user = null
 }
 
 const changePasswordSuccess = function () {

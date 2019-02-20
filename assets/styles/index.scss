@@ -12,12 +12,68 @@ error {
 }
 
 h1 {
-  margin: 10px auto;
+  font-size: 5rem;
+  margin-bottom: 1vh;
+  margin-top: 5vh;
   text-align: center;
 }
 
+nav {
+  display: flex;
+  flex-direction: row-reverse;
+  font-size: 20px;
+  margin-right: 2vw;
+
+  > form {
+    margin: 1vh;
+  }
+}
+
+section {
+  align-items: center;
+  border-top: 0;
+  display: flex;
+  flex-direction: column;
+  margin-top: 0;
+  max-height: 75vh;
+  padding-top: 0;
+
+  > form {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 50vw;
+
+    > button {
+      align-self: center;
+      margin-top: 1vh;
+      min-height: 3vh;
+      width: 10vw;
+    }
+
+    > input {
+      margin: 0;
+      text-align: center;
+    }
+
+    > label {
+      font-size: 1.5rem;
+      font-weight: 450;
+      margin-bottom: 0;
+      margin-top: 2vh;
+    }
+  }
+
+  > h3 {
+    font-weight: 550;
+    margin-bottom: 0;
+    margin-top: 5vh;
+    text-decoration: underline;
+  }
+}
+
 .box {
-  border: 5px solid black;
+  border: 1px solid black;
   font-size: 80px;
   height: $box-dimension;
   margin: 0;
@@ -26,12 +82,20 @@ h1 {
   width: $box-dimension;
 }
 
+.error {
+  background-color: red;
+}
+
+.hidden {
+  display: none;
+}
+
 .turn-red {
-  background: red;
+  background-color: red;
 }
 
 .turn-blue {
-  background: blue;
+  background-color: blue;
 }
 
 

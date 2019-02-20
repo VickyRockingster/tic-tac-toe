@@ -1,5 +1,48 @@
 const ui = require('./ui.js')
 const api = require('./api.js')
+const getFormFields = require('../../../lib/get-form-fields.js')
+
+const winArray = [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [6, 4, 2]]
+
+const onGetGames = function (event) {
+  event.preventDefault()
+  const data = getFormFields(event.target)
+  api.getGames(data.game)
+    .then(ui.getGamesSuccess)
+    .catch(ui.failure)
+}
+
+const onGetGame = function (event) {
+  event.preventDefault()
+  const data = getFormFields(event.target)
+  api.getGame(data.game.id)
+    .then(ui.getGameSuccess)
+    .catch(ui.failure)
+}
+
+const onCreateGame = function (event) {
+  event.preventDefault()
+  const data = getFormFields(event.target)
+  api.createGame(data.game)
+    .then(ui.createGameSuccess)
+    .catch(ui.failure)
+}
+
+const onUpdateGame = function (event) {
+  event.preventDefault()
+  const data = getFormFields(event.target)
+  api.updateGame(data.game.id)
+    .then(ui.updateGameSuccess)
+    .catch(ui.failure)
+}
 
 let counter = 1
 
@@ -16,17 +59,13 @@ const onBlueTurn = function (event) {
 }
 
 const turnX = function (event) {
-  // onRedTurn(event)
-  $(event.target).addClass('turn-red')
+  onRedTurn(event)
   $(event.target).html('X')
-  console.log('turnX was called!')
 }
 
 const turnO = function (event) {
-  // onBlueTurn(event)
-  $(event.target).addClass('turn-blue')
+  onBlueTurn(event)
   $(event.target).html('O')
-  console.log('turnO was called!')
 }
 
 const whoseTurn = function () {
@@ -49,14 +88,21 @@ const onMouseout = (event) => {
 }
 
 const onClick = (event) => {
+  if (counter % 2 === 1) {
+    api.createGame()
+  } else {
+    api.updateGame()
+  }
   whoseTurn() ? turnX(event) : turnO(event)
   clickTracker()
 }
-// onMouseover - access those turn it is via clicktracker
-// onClick
+
+const invalidMove = function (event) {
+  $(event.target).html() !== null ? onClick(event) : ui.failure()
+}
+
 const clearBoard = (event) => {
   event.preventDefault()
-  console.log('clearBoard was called!')
   $('.box').html('')
   $('.box').removeClass('turn-red')
   $('.box').removeClass('turn-blue')
@@ -64,6 +110,10 @@ const clearBoard = (event) => {
 }
 
 module.exports = {
+  onGetGames,
+  onGetGame,
+  onCreateGame,
+  onUpdateGame,
   turnX,
   turnO,
   whoseTurn,
@@ -72,5 +122,6 @@ module.exports = {
   onMouseover,
   onMouseout,
   onClick,
+  invalidMove,
   clearBoard
 }
