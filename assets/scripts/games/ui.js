@@ -1,14 +1,33 @@
 const store = require('../store.js')
+const getFormFields = require('../../../lib/get-form-fields.js')
 
 const getGamesSuccess = function (data) {
-  store.games = data.games
+  const games = data
   $('#user-feedback').html('These are all the games you\'ve played!')
+  $('#display-games').html('')
+//   responseData.books.forEach(book => {
+//     const bookHtml = (`
+//     <h2>Title: ${book.title}</h2>
+//     <h3>Author: ${book.author}</h3>
+//     <p>ID: ${book.id}</p>
+//     <br>
+//     `)
+//     $('#book-display').append(bookHtml)
+//   })
 }
 
 const getGameSuccess = function (data) {
-  store.game = data.game
+  const game = data
   $('#user-feedback').html('This is your most recent game.')
+  $('#display-games').html('')
 }
+// const book = responseData.book
+//   const bookHtml = (`
+//     <h2>Title: ${book.title}</h2>
+//     <h3>Author: ${book.author}</h3>
+//     <p>ID: ${book.id}</p>
+//     `)
+//   $('#book-display').html(bookHtml)
 
 const createGameSuccess = function (data) {
   const game = data

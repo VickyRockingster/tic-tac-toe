@@ -2,20 +2,20 @@ const ui = require('./ui.js')
 const api = require('./api.js')
 const store = require('../store.js')
 
-// const onGetGames = function (event) {
-//   event.preventDefault()
-//   const data = getFormFields(event.target)
-//   api.getGames(data.game)
-//     .then(ui.getGamesSuccess)
-//     .catch(ui.failure)
-// }
-//
-// const onGetGame = function (event) {
-//   event.preventDefault()
-//   api.getGame(store.game.id)
-//     .then(ui.getGameSuccess)
-//     .catch(ui.failure)
-// }
+const onGetGames = function (event) {
+  event.preventDefault()
+  api.getGames()
+    .then(ui.getGamesSuccess)
+    .catch(ui.failure)
+}
+
+const onGetGame = function (event) {
+  event.preventDefault()
+  api.getGame(store.gameId)
+    .then(ui.getGameSuccess)
+    .catch(ui.failure)
+}
+
 let turnTracker
 
 const showAccountPage = function (event) {
@@ -24,6 +24,7 @@ const showAccountPage = function (event) {
   // const games = store.games
   $('h1').html('Tic-Tac-Toe')
   $('.account').removeClass('hidden')
+  $('#game-page').removeClass('hidden')
   $('main').addClass('hidden')
   $('.email').html('Email: ' + email)
   $('.email').addClass('header')
@@ -33,6 +34,7 @@ const showGamePage = function (event) {
   event.preventDefault()
   $('main').removeClass('hidden')
   $('section').addClass('hidden')
+  $('#game-page').addClass('hidden')
 }
 
 const winOptions = function (gameArray) {
@@ -176,7 +178,7 @@ module.exports = {
   onClick,
   winOptions,
   didYouWin,
-  clearBoard
-  // onGetGames,
-  // onGetGame,
+  clearBoard,
+  onGetGames,
+  onGetGame
 }
