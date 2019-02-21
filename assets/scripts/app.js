@@ -15,4 +15,5 @@ $(() => {
   $('.box').on('click', events.onClick)
   $('#clear-board').on('click', events.clearBoard)
   $('#account').on('submit', events.showAccountPage)
+  $('#game-page').on('submit', events.showGamePage)
 })

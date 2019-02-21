@@ -29,6 +29,12 @@ const showAccountPage = function (event) {
   $('.email').addClass('header')
 }
 
+const showGamePage = function (event) {
+  event.preventDefault()
+  $('main').removeClass('hidden')
+  $('section').addClass('hidden')
+}
+
 const winOptions = function (gameArray) {
   switch (gameArray) {
     case gameArray[0] === gameArray[1] === gameArray[2]:
@@ -61,7 +67,7 @@ const winOptions = function (gameArray) {
 
 const didYouWin = function (gameArray) {
   if (winOptions(gameArray)) {
-    $('#user-feedback').html('Game Over! Press Reset to start a New Game')
+    $('#user-feedback').html('Game Over! Press Reset to start a new game!')
     turnTracker = undefined
   }
 }
@@ -142,16 +148,16 @@ const clearBoard = (event) => {
   turnTracker = undefined
 }
 
-const onMouseOver = (event) => {
-  event.preventDefault()
+const onMouseOver = function (event) {
+  // event.preventDefault()
   turnTracker === true || turnTracker === undefined
     ? $(event.target).addClass('turn-red') : $(event.target).addClass('turn-blue')
   console.log(turnTracker)
   console.log('onMouseOver just ran!')
 }
 
-const onMouseOut = (event) => {
-  event.preventDefault()
+const onMouseOut = function (event) {
+  // event.preventDefault()
   $(event.target).removeClass('turn-red')
   $(event.target).removeClass('turn-blue')
   console.log('onMouseOut just ran!')
@@ -160,6 +166,7 @@ const onMouseOut = (event) => {
 module.exports = {
   turnTracker,
   showAccountPage,
+  showGamePage,
   onMouseOver,
   onMouseOut,
   onCreateGame,

@@ -16,6 +16,7 @@ const signInSuccess = function (data) {
   $('#sign-in').trigger('reset')
   store.user = data.user
   $('nav').removeClass('hidden')
+  $('#game-page').addClass('hidden')
   $('main').removeClass('hidden')
   $('section').addClass('hidden')
   setTimeout(() => {
