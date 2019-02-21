@@ -6,25 +6,42 @@ const getGamesSuccess = function (data) {
 }
 
 const getGameSuccess = function (data) {
-  // store.game = data.game
+  store.game = data.game
   $('#user-feedback').html('This is your most recent game.')
 }
 
 const createGameSuccess = function (data) {
-  store.game = data.game
-  console.log(JSON.stringify(data))
+  const game = data
+  store.game = game
+  const gameId = store.game.game.id
+  store.gameId = gameId
+  console.log('The following is fron onCreateGameSuccess:')
+  console.log(store.gameId)
+  console.log(store)
   $('#user-feedback').html('Good luck on your game!')
+  $('#user-feedback').addClass('error')
+  setTimeout(() => {
+    $('#user-feedback').html('')
+    $('#user-feedback').removeClass('error')
+  }, 3000)
+  return gameId
 }
 
 const updateGameSuccess = function (data) {
-  store.game = data.game // const game = store.data
+  const game = data
+  store.game = game
+  const gameId = store.game.game.id
+  store.gameId = gameId
+  console.log('The following info is from updateGameSuccess:')
+  console.log(store.gameId)
+  console.log(store)
   console.log(JSON.stringify(data))
-// const bookHtml = (`
-  //   <h2>Title: ${book.title}</h2>
-  //   <h3>Author: ${book.author}</h3>
-  //   <p>ID: ${book.id}</p>
-  //   `)
-  // $('#book-display').html(bookHtml)
+  console.log(JSON.stringify(store.game))
+  console.log(JSON.stringify(store.game.cells))
+  const gameArray = store.game.cells
+  console.log(gameArray)
+  console.log(store)
+  return gameArray
 }
 
 const failure = function () {

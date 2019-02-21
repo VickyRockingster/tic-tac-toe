@@ -1,14 +1,9 @@
 @import '~bootstrap/scss/bootstrap';
 
-$basic-background-color: #ffffff;
-$box-dimension: 150px;
+$box-dimension: 20vh;
 
 button {
   background-color: red // make another warm color(hexadecimal)
-}
-
-error {
-  color: red // change to hexadecimal
 }
 
 h1 {
@@ -96,6 +91,14 @@ section {
 
 .hidden {
   display: none;
+}
+
+.stay-red {
+  background-color: red;
+}
+
+.stay-blue {
+  background-color: blue;
 }
 
 .turn-red {
