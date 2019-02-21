@@ -19,7 +19,6 @@ const getGamesSuccess = function (data) {
 const getGameSuccess = function (data) {
   const game = data
   $('#user-feedback').html('This is your most recent game.')
-  $('#display-games').html('')
 }
 // const book = responseData.book
 //   const bookHtml = (`
