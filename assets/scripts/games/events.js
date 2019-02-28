@@ -2,87 +2,83 @@ const ui = require('./ui.js')
 const api = require('./api.js')
 const store = require('../store.js')
 
-const onGetGames = function (event) {
-  event.preventDefault()
-  api.getGames()
-    .then(ui.getGamesSuccess)
-    .catch(ui.failure)
-}
-
-const onGetGame = function (event) {
-  event.preventDefault()
-  api.getGame(store.gameId)
-    .then(ui.getGameSuccess)
-    .catch(ui.failure)
-}
-
-let turnTracker
-
-const showAccountPage = function (event) {
+const showAccountPage = (event) => {
   event.preventDefault()
   const email = store.user.email
   // const games = store.games
   $('h1').html('Tic-Tac-Toe')
   $('.account').removeClass('hidden')
+  $('#account').addClass('hidden')
   $('#game-page').removeClass('hidden')
   $('main').addClass('hidden')
   $('.email').html('Email: ' + email)
   $('.email').addClass('header')
 }
 
-const showGamePage = function (event) {
+const showGamePage = (event) => {
   event.preventDefault()
   $('main').removeClass('hidden')
   $('section').addClass('hidden')
   $('#game-page').addClass('hidden')
 }
 
-const winOptions = function (gameArray) {
-  switch (gameArray) {
-    case gameArray[0] === gameArray[1] === gameArray[2]:
-      gameArray[0] === 'X' ? $('h1').html('X Wins!') : $('h1').html('O Wins!')
-      return true
-    case gameArray[3] === gameArray[4] === gameArray[5]:
-      gameArray[3] === 'X' ? $('h1').html('X Wins!') : $('h1').html('O Wins!')
-      return true
-    case gameArray[6] === gameArray[7] === gameArray[8]:
-      gameArray[6] === 'X' ? $('h1').html('X Wins!') : $('h1').html('O Wins!')
-      return true
-    case gameArray[0] === gameArray[3] === gameArray[6]:
-      gameArray[0] === 'X' ? $('h1').html('X Wins!') : $('h1').html('O Wins!')
-      return true
-    case gameArray[1] === gameArray[4] === gameArray[7]:
-      gameArray[1] === 'X' ? $('h1').html('X Wins!') : $('h1').html('O Wins!')
-      return true
-    case gameArray[2] === gameArray[5] === gameArray[8]:
-      gameArray[2] === 'X' ? $('h1').html('X Wins!') : $('h1').html('O Wins!')
-      return true
-    case gameArray[0] === gameArray[4] === gameArray[8]:
-      gameArray[0] === 'X' ? $('h1').html('X Wins!') : $('h1').html('O Wins!')
-      return true
-    case gameArray[6] === gameArray[4] === gameArray[2]:
-      gameArray[6] === 'X' ? $('h1').html('X Wins!') : $('h1').html('O Wins!')
-      return true
-  }
-  return false
-}
+// const turnX = function (event) {
+//   // onRedTurn(event)
+//   $(event.target).addClass('stay-red')
+//   $(event.target).html('X')
+//   console.log('turnX was called!')
+// }
+//
+// const turnO = function (event) {
+//   // onBlueTurn(event)
+//   $(event.target).addClass('stay-blue')
+//   $(event.target).html('O')
+//   console.log('turnO was called!')
+// }
 
-const didYouWin = function (gameArray) {
-  if (winOptions(gameArray)) {
-    $('#user-feedback').html('Game Over! Press Reset to start a new game!')
-    turnTracker = undefined
-  }
-}
-
-const onCreateGame = function (event) {
+const onCreateGame = () => {
+  event.preventDefault()
   api.createGame()
     .then(ui.createGameSuccess)
-    .then(turnX(event))
-    // .then(onUpdateGame(event))
     .catch(ui.failure)
+  console.log('onCreateGame ran!')
+  console.log(store.gameId)
 }
 
-const onUpdateGame = function (event) {
+let counter = 1
+
+const clickTracker = function () {
+  counter += 1
+  console.log('clickTracker ran!')
+  return counter
+}
+
+const whoseTurn = function () {
+  // event.preventDefault()
+  // console.log(`${counter} in the whose turn function`)
+  if (counter % 2 === 1) {
+    return true // now it's x's turn
+  } else {
+    return false // now it's o's turn
+  }
+}
+
+const onMouseEnter = (event) => {
+  event.preventDefault()
+  whoseTurn() ? $(event.target).addClass('turn-red') : $(event.target).addClass('turn-blue')
+  // console.log(turnTracker())
+  // console.log('onMouseEnter just ran!')
+}
+
+const onMouseLeave = event => {
+  event.preventDefault()
+  $(event.target).removeClass('turn-red')
+  $(event.target).removeClass('turn-blue')
+  // console.log('onMouseLeave just ran!')
+}
+
+const onUpdateGame = (event) => {
+  // event.preventDefault()
   const gameEleIndex = $(event.target).val('id')
   const gameEleValue = $(event.target).html()
   const newMove = {
@@ -94,91 +90,113 @@ const onUpdateGame = function (event) {
       'over': false
     }
   }
+  console.log('the following is from onUpdateGame:')
   console.log(store)
   console.log(store.gameId)
+  console.log(newMove)
   api.updateGame(store.gameId, newMove)
     .then(ui.updateGameSuccess)
-    .then(didYouWin)
+    // .then(didYouWin)
     .catch(ui.failure)
+  // console.log(didYouWin())
 }
 
-const turnX = function (event) {
+const turnX = (event) => {
   if ($(event.target).html() !== 'X' && $(event.target).html() !== 'O') {
     $(event.target).addClass('stay-red')
     $(event.target).html('X')
-    onUpdateGame(event)
+    // onUpdateGame(event)
+    console.log(counter)
     $('#user-feedback').html('Now it\'s O\'s turn!')
-    turnTracker = false
+    console.log('turnX ran!')
   } else {
     ui.failure()
   }
-  console.log('turnX ran!')
-  return turnTracker
 }
 
-const turnO = function (event) {
+const turnO = (event) => {
   if ($(event.target).html() !== 'X' && $(event.target).html() !== 'O') {
     $(event.target).addClass('stay-blue')
     $(event.target).html('O')
-    onUpdateGame(event)
+    // onUpdateGame(event)
+    console.log(counter)
     $('#user-feedback').html('Now it\'s X\'s turn!')
-    turnTracker = true
+    console.log('turnO ran!')
   } else {
     ui.failure()
   }
-  console.log('turnO ran!')
-  return turnTracker
 }
 
-const onClick = function (event) {
+const onClick = (event) => {
   event.preventDefault()
-  if (turnTracker === false) {
-    turnO(event)
-  } else if (turnTracker === true) {
-    turnX(event)
-  } else if (turnTracker === undefined) {
-    onCreateGame(event)
+  // whoseTurn() ? turnX(event) : turnO(event)
+  if (counter === 1) {
+    onCreateGame()
   }
+
+  if (whoseTurn() && $(event.target).html() !== 'X' && $(event.target).html() !== 'O') {
+    $(event.target).addClass('stay-red')
+    $(event.target).html('X')
+    // onUpdateGame(event)
+    console.log(counter)
+    $('#user-feedback').html('Now it\'s O\'s turn!')
+    console.log('turnX ran!')
+  } else {
+    if ($(event.target).html() !== 'X' && $(event.target).html() !== 'O') {
+      $(event.target).addClass('stay-blue')
+      $(event.target).html('O')
+      // onUpdateGame(event)
+      console.log(counter)
+      $('#user-feedback').html('Now it\'s X\'s turn!')
+      console.log('turnO ran!')
+    }
+  }
+  const gameEleIndex = $(event.target).val('id')
+  const gameEleValue = $(event.target).html()
+  const newMove = {
+    game: {
+      cell: {
+        index: gameEleIndex,
+        value: gameEleValue
+      },
+      over: false
+    }
+  }
+  console.log('the following is from onUpdateGame:')
+  console.log(store)
+  console.log(store.gameId)
+  console.log(newMove)
+  api.updateGame(store.gameId, newMove)
+    .then(ui.updateGameSuccess)
+    .then(clickTracker)
+    // .then(didYouWin)
+    .catch(ui.failure)
+  // console.log(didYouWin())
+  // clickTracker()
 }
 
 const clearBoard = (event) => {
   event.preventDefault()
+  console.log('clearBoard was called!')
   $('.box').html('')
   $('.box').removeClass('stay-red')
   $('.box').removeClass('stay-blue')
-  $('h1').html('Tic-Tac-Toe')
-  turnTracker = undefined
-}
-
-const onMouseOver = function (event) {
-  // event.preventDefault()
-  turnTracker === true || turnTracker === undefined
-    ? $(event.target).addClass('turn-red') : $(event.target).addClass('turn-blue')
-  console.log(turnTracker)
-  console.log('onMouseOver just ran!')
-}
-
-const onMouseOut = function (event) {
-  // event.preventDefault()
-  $(event.target).removeClass('turn-red')
-  $(event.target).removeClass('turn-blue')
-  console.log('onMouseOut just ran!')
+  counter = 1
+  // $('h1').html('Tic-Tac-Toe')
+  //   onCreateGame()
 }
 
 module.exports = {
-  turnTracker,
   showAccountPage,
   showGamePage,
-  onMouseOver,
-  onMouseOut,
   onCreateGame,
-  onUpdateGame,
   turnX,
   turnO,
+  whoseTurn,
+  onMouseEnter,
+  onMouseLeave,
+  clickTracker,
   onClick,
-  winOptions,
-  didYouWin,
   clearBoard,
-  onGetGames,
-  onGetGame
+  onUpdateGame
 }

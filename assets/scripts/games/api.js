@@ -32,9 +32,10 @@ const createGame = () => {
   })
 }
 
-const updateGame = (ID, newMove) => {
+const updateGame = (id, newMove) => {
+  console.log('updateGame ran!')
   return $.ajax({
-    url: config.apiUrl + `/games/${ID}`,
+    url: config.apiUrl + `/games/${id}`,
     method: 'PATCH',
     headers: {
       Authorization: 'Token token=' + store.user.token

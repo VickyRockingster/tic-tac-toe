@@ -33,15 +33,13 @@ const createGameSuccess = function (data) {
   store.game = game
   const gameId = store.game.game.id
   store.gameId = gameId
-  console.log('The following is fron onCreateGameSuccess:')
-  console.log(store.gameId)
-  console.log(store)
   $('#user-feedback').html('Good luck on your game!')
   $('#user-feedback').addClass('error')
   setTimeout(() => {
     $('#user-feedback').html('')
     $('#user-feedback').removeClass('error')
   }, 3000)
+  console.log('createGameSuccess ran!')
   return gameId
 }
 
@@ -51,14 +49,14 @@ const updateGameSuccess = function (data) {
   const gameId = store.game.game.id
   store.gameId = gameId
   console.log('The following info is from updateGameSuccess:')
-  console.log(store.gameId)
-  console.log(store)
-  console.log(JSON.stringify(data))
-  console.log(JSON.stringify(store.game))
-  console.log(JSON.stringify(store.game.cells))
+  console.log('store.gameId:' + store.gameId)
+  console.log('store:' + store)
+  console.log(JSON.stringify('data:' + data))
+  console.log(JSON.stringify('store.game:' + store.game))
+  console.log(JSON.stringify('store.game.cells:' + store.game.cells))
   const gameArray = store.game.cells
-  console.log(gameArray)
-  console.log(store)
+  console.log('from uodateGameSuccess, gameArray:' + gameArray)
+  console.log('from uodateGameSuccess, store:' + store)
   return gameArray
 }
 
