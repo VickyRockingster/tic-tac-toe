@@ -32,18 +32,22 @@ const createGameSuccess = function (data) {
   const game = data
   store.game = game
   const gameId = store.game.game.id
-  store.gameId = gameId
+  // store.gameId = gameId
   $('#user-feedback').html('Good luck on your game!')
   $('#user-feedback').addClass('error')
   setTimeout(() => {
     $('#user-feedback').html('')
     $('#user-feedback').removeClass('error')
   }, 3000)
+  console.log('from createGameSuccess-gameId: ' + gameId)
+  console.log('from createGameSuccess-store.game: ' + store.game)
   console.log('createGameSuccess ran!')
   return gameId
 }
 
 const updateGameSuccess = function (data) {
+  console.log('updateGameSuccess ran!')
+  console.log(data)
   const game = data
   store.game = game
   const gameId = store.game.game.id

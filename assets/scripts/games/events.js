@@ -36,16 +36,7 @@ const showGamePage = (event) => {
 //   console.log('turnO was called!')
 // }
 
-const onCreateGame = () => {
-  event.preventDefault()
-  api.createGame()
-    .then(ui.createGameSuccess)
-    .catch(ui.failure)
-  console.log('onCreateGame ran!')
-  console.log(store.gameId)
-}
-
-let counter = 1
+let counter = 0
 
 const clickTracker = function () {
   counter += 1
@@ -58,59 +49,84 @@ const whoseTurn = function () {
   // console.log(`${counter} in the whose turn function`)
   if (counter % 2 === 1) {
     return true // now it's x's turn
-  } else {
+  } else if (counter % 2 === 0 && counter !== 0) {
     return false // now it's o's turn
-  }
+  } else { return undefined }
 }
 
 const onMouseEnter = (event) => {
+  event.stopPropagation()
   event.preventDefault()
-  whoseTurn() ? $(event.target).addClass('turn-red') : $(event.target).addClass('turn-blue')
-  // console.log(turnTracker())
+  if (counter !== 0) {
+    whoseTurn() ? $(event.target).addClass('turn-red') : $(event.target).addClass('turn-blue')
+  }// console.log(turnTracker())
   // console.log('onMouseEnter just ran!')
 }
 
-const onMouseLeave = event => {
+const onMouseLeave = (event) => {
+  event.stopPropagation()
   event.preventDefault()
   $(event.target).removeClass('turn-red')
   $(event.target).removeClass('turn-blue')
   // console.log('onMouseLeave just ran!')
 }
 
-const onUpdateGame = (event) => {
+const onCreateGame = () => {
   // event.preventDefault()
-  const gameEleIndex = $(event.target).val('id')
-  const gameEleValue = $(event.target).html()
-  const newMove = {
-    'game': {
-      'cell': {
-        'index': gameEleIndex,
-        'value': gameEleValue
-      },
-      'over': false
-    }
-  }
-  console.log('the following is from onUpdateGame:')
-  console.log(store)
-  console.log(store.gameId)
-  console.log(newMove)
-  api.updateGame(store.gameId, newMove)
-    .then(ui.updateGameSuccess)
-    // .then(didYouWin)
+  api.createGame()
+    .then(ui.createGameSuccess)
     .catch(ui.failure)
-  // console.log(didYouWin())
+  clickTracker()
+  // console.log('onCreateGame ran!')
+  console.log('from onCreateGame:', store.gameId)
 }
+
+// const onUpdateGame = (event) => {
+//   event.stopPropagation()
+//   event.preventDefault()
+//   const gameEleIndex = $(event.target).val('id')
+//   const gameEleValue = $(event.target).html()
+//   const newMove = {
+//     'game': {
+//       'cell': {
+//         'index': gameEleIndex,
+//         'value': gameEleValue
+//       },
+//       'over': false
+//     }
+//   }
+//   console.log('the following is from onUpdateGame:')
+//   console.log('store:' + store)
+//   console.log('store:gameId:' + store.gameId)
+//   console.log('newMove:' + newMove)
+//   api.updateGame(store.gameId, newMove)
+//     .then(ui.updateGameSuccess)
+//     // .then(didYouWin)
+//     .catch(ui.failure)
+//   // console.log(didYouWin())
+// }
 
 const turnX = (event) => {
   if ($(event.target).html() !== 'X' && $(event.target).html() !== 'O') {
     $(event.target).addClass('stay-red')
     $(event.target).html('X')
+    console.log('counter from turnX:', counter)
     // onUpdateGame(event)
-    console.log(counter)
     $('#user-feedback').html('Now it\'s O\'s turn!')
-    console.log('turnX ran!')
-  } else {
-    ui.failure()
+    const gameEleIndex = $(event.target).val('id')
+    const gameEleValue = 'X' // $(event.target).html()
+    const newMove = {
+      game: {
+        cell: {
+          index: gameEleIndex,
+          value: gameEleValue
+        },
+        over: false
+      }
+    }
+    api.updateGame(store.gameId, newMove)
+      .then(ui.updateGameSuccess)
+      .catch(ui.failure)
   }
 }
 
@@ -118,72 +134,48 @@ const turnO = (event) => {
   if ($(event.target).html() !== 'X' && $(event.target).html() !== 'O') {
     $(event.target).addClass('stay-blue')
     $(event.target).html('O')
-    // onUpdateGame(event)
-    console.log(counter)
-    $('#user-feedback').html('Now it\'s X\'s turn!')
+    console.log('counter from turnO:', counter)
     console.log('turnO ran!')
-  } else {
-    ui.failure()
+    // onUpdateGame(event)
+    $('#user-feedback').html('Now it\'s X\'s turn!')
+    const gameEleIndex = $(event.target).val('id')
+    const gameEleValue = 'O' // $(event.target).html()
+    const newMove = {
+      game: {
+        cell: {
+          index: gameEleIndex,
+          value: gameEleValue
+        },
+        over: false
+      }
+    }
+    api.updateGame(store.gameId, newMove)
+      .then(ui.updateGameSuccess)
+      .catch(ui.failure)
   }
 }
 
 const onClick = (event) => {
+  event.stopPropagation()
   event.preventDefault()
-  // whoseTurn() ? turnX(event) : turnO(event)
-  if (counter === 1) {
-    onCreateGame()
-  }
-
-  if (whoseTurn() && $(event.target).html() !== 'X' && $(event.target).html() !== 'O') {
-    $(event.target).addClass('stay-red')
-    $(event.target).html('X')
-    // onUpdateGame(event)
-    console.log(counter)
-    $('#user-feedback').html('Now it\'s O\'s turn!')
-    console.log('turnX ran!')
-  } else {
-    if ($(event.target).html() !== 'X' && $(event.target).html() !== 'O') {
-      $(event.target).addClass('stay-blue')
-      $(event.target).html('O')
-      // onUpdateGame(event)
-      console.log(counter)
-      $('#user-feedback').html('Now it\'s X\'s turn!')
-      console.log('turnO ran!')
-    }
-  }
-  const gameEleIndex = $(event.target).val('id')
-  const gameEleValue = $(event.target).html()
-  const newMove = {
-    game: {
-      cell: {
-        index: gameEleIndex,
-        value: gameEleValue
-      },
-      over: false
-    }
-  }
-  console.log('the following is from onUpdateGame:')
-  console.log(store)
-  console.log(store.gameId)
-  console.log(newMove)
-  api.updateGame(store.gameId, newMove)
-    .then(ui.updateGameSuccess)
-    .then(clickTracker)
-    // .then(didYouWin)
-    .catch(ui.failure)
-  // console.log(didYouWin())
-  // clickTracker()
+  // if (counter === 1) {
+  //   onCreateGame()
+  //   // onUpdateGame()
+  // }
+  whoseTurn() ? turnX(event) : turnO(event)
+  clickTracker()
+  // onUpdateGame(event)
 }
 
-const clearBoard = (event) => {
+const startGame = (event) => {
+  event.stopPropagation()
   event.preventDefault()
-  console.log('clearBoard was called!')
   $('.box').html('')
   $('.box').removeClass('stay-red')
   $('.box').removeClass('stay-blue')
-  counter = 1
-  // $('h1').html('Tic-Tac-Toe')
-  //   onCreateGame()
+  $('h1').html('Tic-Tac-Toe')
+  console.log('startGame was called!')
+  onCreateGame()
 }
 
 module.exports = {
@@ -197,6 +189,6 @@ module.exports = {
   onMouseLeave,
   clickTracker,
   onClick,
-  clearBoard,
-  onUpdateGame
+  startGame
+  // onUpdateGame
 }
