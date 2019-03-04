@@ -9,7 +9,6 @@ html
 JavaScript
 jQuery
 Sass
-(JSON?)
 
 Planning:
 I started by outlining the process of the game logic, which I implemented to create a clickable game. However, I quickly got bogged down by introducing the other aspects of the game (authentication, styling, etc). I had completed a lot of other aspects of the game before I was able to go back and connect the game to the api, several days later,
