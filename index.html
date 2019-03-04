@@ -26,7 +26,7 @@
         </nav>
         <h1>Tic-Tac-Toe</h1>
       </header>
-        <p id="user-feedback"></p>
+        <p class="user-feedback" id="user-feedback"></p>
         <section class="front-page">
           <h3 class="sign-up">SIGN UP</h3>
           <form id="sign-up">
@@ -50,23 +50,23 @@
       <main class="container hidden">
         <button type="button" id="start-game">PRESS TO START NEW GAME</button>
         <div class="row">
-          <div class="box col-4" id="0"></div>
-          <div class="box col-4" id="1"></div>
-          <div class="box col-4" id="2"></div>
+          <div class="box col-4" data-cell-index="0" id="0"></div>
+          <div class="box col-4" data-cell-index="1" id="1"></div>
+          <div class="box col-4" data-cell-index="2" id="2"></div>
         </div>
         <div class="row">
-          <div class="box col-4" id="3"></div>
-          <div class="box col-4" id="4"></div>
-          <div class="box col-4" id="5"></div>
+          <div class="box col-4" data-cell-index="3" id="3"></div>
+          <div class="box col-4" data-cell-index="4" id="4"></div>
+          <div class="box col-4" data-cell-index="5" id="5"></div>
         </div>
         <div class="row">
-          <div class="box col-4" id="6"></div>
-          <div class="box col-4" id="7"></div>
-          <div class="box col-4" id="8"></div>
+          <div class="box col-4" data-cell-index="6" id="6"></div>
+          <div class="box col-4" data-cell-index="7" id="7"></div>
+          <div class="box col-4" data-cell-index="8" id="8"></div>
         </div>
       </main>
       <section class="account hidden">
-        <h3>CHANGE PASSWORD</h3>
+        <h3 id="change-password-heading" >CHANGE PASSWORD</h3>
         <form id="change-password">
           <label class="email">''</label>
           <label>Old Password</label>
@@ -81,8 +81,8 @@
         <form id="get-games">
           <button type="submit" value="Get Games">All Games</button>
         </form>
-        <p id="display-games"></p>
       </section>
+      <div class="display" id="display-games"></div>
     </body>
 </html>
 

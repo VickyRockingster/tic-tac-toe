@@ -1,36 +1,6 @@
-const ui = require('./ui.js')
-const api = require('./api.js')
-const store = require('../store.js')
-
-// const onRedTurn = function (event) {
-//   $(event.target).addClass('turn-red')
-// }
-// const onBlueTurn = function (event) {
-//   $(event.target).addClass('turn-blue')
-// }
-
-// const onMouseover = (event) => {
-//   whoseTurn() ? onRedTurn(event) : onBlueTurn(event)
-// }
-
-// const onMouseout = (event) => {
-//   $(event.target).removeClass('turn-red')
-//   $(event.target).removeClass('turn-blue')
-// }
-
-// const onGetGames = (event) => {
-//   event.preventDefault()
-//   api.getGames()
-//     .then(ui.getGamesSuccess)
-//     .catch(ui.failure)
-// }
-//
-// const onGetGame = (event) => {
-//   event.preventDefault()
-//   api.getGame(store.gameId)
-//     .then(ui.getGameSuccess)
-//     .catch(ui.failure)
-// }
+// const ui = require('./ui.js')
+// const api = require('./api.js')
+// const store = require('../store.js')
 //
 // const turnTracker = function (turn) {
 //   if (turn === 'X') {

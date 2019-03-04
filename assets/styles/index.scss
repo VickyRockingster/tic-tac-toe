@@ -13,6 +13,13 @@ h1 {
   text-align: center;
 }
 
+main {
+  > button {
+    margin-bottom: 2vh;
+    margin-left: 0;
+  }
+}
+
 nav {
   display: flex;
   flex-direction: row-reverse;
@@ -109,6 +116,9 @@ section {
   background-color: blue;
 }
 
+.user-feedback {
+  height: 25px;
+}
 
 // .turn-x,
 // .turn-o {

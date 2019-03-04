@@ -35,6 +35,7 @@ const signOutSuccess = function (data) {
   $('.account').addClass('hidden')
   $('main').addClass('hidden')
   $('nav').addClass('hidden')
+  $('#display-games').html('')
   setTimeout(() => {
     $('#user-feedback').html('')
     $('#user-feedback').removeClass('error')

@@ -1,66 +1,43 @@
 const store = require('../store.js')
-const getFormFields = require('../../../lib/get-form-fields.js')
+// const getFormFields = require('../../../lib/get-form-fields.js')
 
 const getGamesSuccess = function (data) {
-  const games = data
+  store.games = data.games
   $('#user-feedback').html('These are all the games you\'ve played!')
-  $('#display-games').html('')
-//   responseData.books.forEach(book => {
-//     const bookHtml = (`
-//     <h2>Title: ${book.title}</h2>
-//     <h3>Author: ${book.author}</h3>
-//     <p>ID: ${book.id}</p>
-//     <br>
-//     `)
-//     $('#book-display').append(bookHtml)
-//   })
+  $('#display-games').html(JSON.stringify(store.games))
+//  $('.account').addClass('hidden')
 }
 
 const getGameSuccess = function (data) {
-  const game = data
-  $('#user-feedback').html('This is your most recent game.')
+  console.log(data)
+  console.log(data.game)
+  console.log(store.recentGame)
+  store.recentGame = data.game
+  $('#user-feedback').html('This is your most recent game!')
+  $('#display-games').html(JSON.stringify(store.recentGame))
+  console.log(data)
+  console.log(data.game)
+  console.log(store.recentGame)
 }
-// const book = responseData.book
-//   const bookHtml = (`
-//     <h2>Title: ${book.title}</h2>
-//     <h3>Author: ${book.author}</h3>
-//     <p>ID: ${book.id}</p>
-//     `)
-//   $('#book-display').html(bookHtml)
 
 const createGameSuccess = function (data) {
-  const game = data
-  store.game = game
-  const gameId = store.game.game.id
-  // store.gameId = gameId
+  store.currentGame = data.game
   $('#user-feedback').html('Good luck on your game!')
-  $('#user-feedback').addClass('error')
+  $('#user-feedback').addClass('stay-blue')
   setTimeout(() => {
     $('#user-feedback').html('')
-    $('#user-feedback').removeClass('error')
+    $('#user-feedback').removeClass('stay-blue')
   }, 3000)
-  console.log('from createGameSuccess-gameId: ' + gameId)
-  console.log('from createGameSuccess-store.game: ' + store.game)
-  console.log('createGameSuccess ran!')
-  return gameId
+  console.log('from createGameSuccess-store.currentGame: ' + JSON.stringify(store.currentGame))
+  console.log('from createGameSuccess-store.currentGame.id: ' + store.currentGame.id)
+  return store.currentGame.id
 }
 
 const updateGameSuccess = function (data) {
-  console.log('updateGameSuccess ran!')
-  console.log(data)
-  const game = data
-  store.game = game
-  const gameId = store.game.game.id
-  store.gameId = gameId
-  console.log('The following info is from updateGameSuccess:')
-  console.log('store.gameId:' + store.gameId)
-  console.log('store:' + store)
-  console.log(JSON.stringify('data:' + data))
-  console.log(JSON.stringify('store.game:' + store.game))
-  console.log(JSON.stringify('store.game.cells:' + store.game.cells))
-  const gameArray = store.game.cells
-  console.log('from uodateGameSuccess, gameArray:' + gameArray)
-  console.log('from uodateGameSuccess, store:' + store)
+  store.currentGame = data.game
+  const gameArray = store.currentGame.cells
+  console.log('from updateGameSuccess, gameArray:' + JSON.stringify(gameArray))
+  console.log('from updateGameSuccess, store.currentGame.cells:' + JSON.stringify(store.currentGame.cells))
   return gameArray
 }
 
