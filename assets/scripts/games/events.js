@@ -60,7 +60,9 @@ const whoseTurn = function () {
 }
 
 const winOptions = function () {
-  if ((store.currentGame.cells[0] === store.currentGame.cells[1] && store.currentGame.cells[1] === store.currentGame.cells[2] && store.currentGame.cells[2] === 'X') ||
+  if (counter < 5) {
+    return false
+  } else if ((store.currentGame.cells[0] === store.currentGame.cells[1] && store.currentGame.cells[1] === store.currentGame.cells[2] && store.currentGame.cells[2] === 'X') ||
     (store.currentGame.cells[3] === store.currentGame.cells[4] && store.currentGame.cells[4] === store.currentGame.cells[5] && store.currentGame.cells[5] === 'X') ||
     (store.currentGame.cells[6] === store.currentGame.cells[7] && store.currentGame.cells[7] === store.currentGame.cells[8] && store.currentGame.cells[8] === 'X') ||
     (store.currentGame.cells[0] === store.currentGame.cells[3] && store.currentGame.cells[3] === store.currentGame.cells[6] && store.currentGame.cells[6] === 'X') ||
@@ -100,7 +102,7 @@ const onMouseEnter = (event) => {
   event.preventDefault()
   if (counter !== 0) {
     whoseTurn() ? $(event.target).addClass('turn-red') : $(event.target).addClass('turn-blue')
-  }
+  } else { }
 }
 
 const onMouseLeave = (event) => {
@@ -110,45 +112,13 @@ const onMouseLeave = (event) => {
   $(event.target).removeClass('turn-blue')
 }
 
-const onCreateGame = () => {
-  api.createGame()
-    .then(ui.createGameSuccess)
-    .catch(ui.failure)
-  clickTracker()
-}
-
-// const onUpdateGame = (event) => {
-//   event.stopPropagation()
-//   event.preventDefault()
-//   const gameEleIndex = $(event.target).val('id')
-//   const gameEleValue = $(event.target).html()
-//   const newMove = {
-//     'game': {
-//       'cell': {
-//         'index': gameEleIndex,
-//         'value': gameEleValue
-//       },
-//       'over': false
-//     }
-//   }
-//   console.log('the following is from onUpdateGame:')
-//   console.log('store:' + store)
-//   console.log('store:gameId:' + store.gameId)
-//   console.log('newMove:' + newMove)
-//   api.updateGame(store.gameId, newMove)
-//     .then(ui.updateGameSuccess)
-//     // .then(didYouWin)
-//     .catch(ui.failure)
-//   // console.log(didYouWin())
-// }
-
 const turnX = (event) => {
   if ($(event.target).html() !== 'X' && $(event.target).html() !== 'O') {
     $(event.target).addClass('stay-red')
     $(event.target).html('X')
     $('#user-feedback').html('Now it\'s O\'s turn!')
     const gameEleIndex = $(event.target).data('cell-index')
-    const gameEleValue = 'X' // $(event.target).html()
+    const gameEleValue = 'X'
     const newMove = {
       game: {
         cell: {
@@ -172,7 +142,7 @@ const turnO = (event) => {
     // onUpdateGame(event)
     $('#user-feedback').html('Now it\'s X\'s turn!')
     const gameEleIndex = $(event.target).data('cell-index')
-    const gameEleValue = 'O' // $(event.target).html()
+    const gameEleValue = 'O'
     const newMove = {
       game: {
         cell: {
@@ -190,12 +160,8 @@ const turnO = (event) => {
 }
 
 const onClick = (event) => {
-  // event.stopPropagation()
   event.preventDefault()
   whoseTurn() ? turnX(event) : turnO(event)
-  // if (counter >= 5) {
-  //   didYouWin()
-  // }
   clickTracker()
 }
 
@@ -206,8 +172,12 @@ const startGame = (event) => {
   $('.box').removeClass('stay-blue')
   $('h1').html('Tic-Tac-Toe')
   $('#user-feedback').html('')
-  $('.box').on('click', onClick)
-  onCreateGame()
+  $('.box').one('click', onClick)
+  api.createGame()
+    .then(ui.createGameSuccess)
+    .catch(ui.failure)
+  counter = 0
+  clickTracker()
 }
 
 module.exports = {
@@ -215,7 +185,6 @@ module.exports = {
   onGetGames,
   showAccountPage,
   showGamePage,
-  onCreateGame,
   turnX,
   turnO,
   whoseTurn,
@@ -226,5 +195,4 @@ module.exports = {
   startGame,
   winOptions,
   didYouWin
-  // onUpdateGame
 }

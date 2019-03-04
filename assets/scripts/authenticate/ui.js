@@ -3,17 +3,14 @@ const events = require('../games/events.js')
 
 const signUpSuccess = function () {
   $('#user-feedback').html('You have successfully signed up!')
-  $('#user-feedback').addClass('error')
   $('#sign-up').trigger('reset')
   setTimeout(() => {
     $('#user-feedback').html('')
-    $('#user-feedback').removeClass('error')
   }, 3000)
 }
 
 const signInSuccess = function (data) {
   $('#user-feedback').html('You have successfully signed in!')
-  $('#user-feedback').addClass('error')
   $('#sign-in').trigger('reset')
   store.user = data.user
   $('nav').removeClass('hidden')
@@ -23,13 +20,11 @@ const signInSuccess = function (data) {
   $('.box').off('click', events.onClick)
   setTimeout(() => {
     $('#user-feedback').html('')
-    $('#user-feedback').removeClass('error')
   }, 3000)
 }
 
 const signOutSuccess = function (data) {
   $('#user-feedback').html('You have successfully signed out!')
-  $('#user-feedback').addClass('error')
   $('#sign-out').trigger('reset')
   store.user = null
   $('h1').html('Tic-Tac-Toe')
@@ -40,17 +35,14 @@ const signOutSuccess = function (data) {
   $('#display-games').html('')
   setTimeout(() => {
     $('#user-feedback').html('')
-    $('#user-feedback').removeClass('error')
   }, 3000)
 }
 
 const changePasswordSuccess = function () {
   $('#user-feedback').html('You have successfully changed your password!')
-  $('#user-feedback').addClass('error')
   $('form').trigger('reset')
   setTimeout(() => {
     $('#user-feedback').html('')
-    $('#user-feedback').removeClass('error')
   }, 3000)
 }
 

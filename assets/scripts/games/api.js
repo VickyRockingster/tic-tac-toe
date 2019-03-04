@@ -13,7 +13,7 @@ const getGames = () => {
 
 const getGame = (ID) => {
   return $.ajax({
-    url: config.apiUrl + `/games${ID}`,
+    url: config.apiUrl + `/games/${ID}`,
     method: 'GET',
     headers: {
       Authorization: 'Token token=' + store.user.token
@@ -33,7 +33,6 @@ const createGame = () => {
 }
 
 const updateGame = (id, newMove) => {
-  console.log('updateGame ran!')
   return $.ajax({
     url: config.apiUrl + `/games/${id}`,
     method: 'PATCH',
