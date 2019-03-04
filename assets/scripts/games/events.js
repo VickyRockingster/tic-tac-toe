@@ -27,7 +27,7 @@ const showAccountPage = (event) => {
   $('main').addClass('hidden')
   $('.email').html('Email: ' + email)
   $('.email').addClass('header')
-  $('#display-games').html('')
+  $('#user-feedback').html('')
 }
 
 // hides the account "page "and shows the "page" to play the game
@@ -59,64 +59,34 @@ const whoseTurn = function () {
   } else { return undefined } // I am creating a game, and haven't clicked a .box yet
 }
 
-// const winOptions = function (gameArray) {
-//   switch (gameArray) {
-//     case gameArray[0] === gameArray[1] === gameArray[2]:
-//       gameArray[0] === 'X' ? $('h1').html('X Wins!') : $('h1').html('O Wins!')
-//       return true
-//     case gameArray[3] === gameArray[4] === gameArray[5]:
-//       gameArray[3] === 'X' ? $('h1').html('X Wins!') : $('h1').html('O Wins!')
-//       return true
-//     case gameArray[6] === gameArray[7] === gameArray[8]:
-//       gameArray[6] === 'X' ? $('h1').html('X Wins!') : $('h1').html('O Wins!')
-//       return true
-//     case gameArray[0] === gameArray[3] === gameArray[6]:
-//       gameArray[0] === 'X' ? $('h1').html('X Wins!') : $('h1').html('O Wins!')
-//       return true
-//     case gameArray[1] === gameArray[4] === gameArray[7]:
-//       gameArray[1] === 'X' ? $('h1').html('X Wins!') : $('h1').html('O Wins!')
-//       return true
-//     case gameArray[2] === gameArray[5] === gameArray[8]:
-//       gameArray[2] === 'X' ? $('h1').html('X Wins!') : $('h1').html('O Wins!')
-//       return true
-//     case gameArray[0] === gameArray[4] === gameArray[8]:
-//       gameArray[0] === 'X' ? $('h1').html('X Wins!') : $('h1').html('O Wins!')
-//       return true
-//     case gameArray[2] === gameArray[4] === gameArray[6]:
-//       gameArray[2] === 'X' ? $('h1').html('X Wins!') : $('h1').html('O Wins!')
-//       return true
-//   }
-//   return false
-// }
-
 const winOptions = function () {
-  switch (store.currentGame.cells) {
-    case store.currentGame.cells[0] === store.currentGame.cells[1] === store.currentGame.cells[2]:
-      store.currentGame.cells[0] === 'X' ? $('h1').html('X Wins!') : $('h1').html('O Wins!')
-      return true
-    case store.currentGame.cells[3] === store.currentGame.cells[4] === store.currentGame.cells[5]:
-      store.currentGame.cells[3] === 'X' ? $('h1').html('X Wins!') : $('h1').html('O Wins!')
-      return true
-    case store.currentGame.cells[6] === store.currentGame.cells[7] === store.currentGame.cells[8]:
-      store.currentGame.cells[6] === 'X' ? $('h1').html('X Wins!') : $('h1').html('O Wins!')
-      return true
-    case store.currentGame.cells[0] === store.currentGame.cells[3] === store.currentGame.cells[6]:
-      store.currentGame.cells[0] === 'X' ? $('h1').html('X Wins!') : $('h1').html('O Wins!')
-      return true
-    case store.currentGame.cells[1] === store.currentGame.cells[4] === store.currentGame.cells[7]:
-      store.currentGame.cells[1] === 'X' ? $('h1').html('X Wins!') : $('h1').html('O Wins!')
-      return true
-    case store.currentGame.cells[2] === store.currentGame.cells[5] === store.currentGame.cells[8]:
-      store.currentGame.cells[2] === 'X' ? $('h1').html('X Wins!') : $('h1').html('O Wins!')
-      return true
-    case store.currentGame.cells[0] === store.currentGame.cells[4] === store.currentGame.cells[8]:
-      store.currentGame.cells[0] === 'X' ? $('h1').html('X Wins!') : $('h1').html('O Wins!')
-      return true
-    case store.currentGame.cells[2] === store.currentGame.cells[4] === store.currentGame.cells[6]:
-      store.currentGame.cells[2] === 'X' ? $('h1').html('X Wins!') : $('h1').html('O Wins!')
-      return true
-  }
-  return false
+  if ((store.currentGame.cells[0] === store.currentGame.cells[1] && store.currentGame.cells[1] === store.currentGame.cells[2] && store.currentGame.cells[2] === 'X') ||
+    (store.currentGame.cells[3] === store.currentGame.cells[4] && store.currentGame.cells[4] === store.currentGame.cells[5] && store.currentGame.cells[5] === 'X') ||
+    (store.currentGame.cells[6] === store.currentGame.cells[7] && store.currentGame.cells[7] === store.currentGame.cells[8] && store.currentGame.cells[8] === 'X') ||
+    (store.currentGame.cells[0] === store.currentGame.cells[3] && store.currentGame.cells[3] === store.currentGame.cells[6] && store.currentGame.cells[6] === 'X') ||
+    (store.currentGame.cells[1] === store.currentGame.cells[4] && store.currentGame.cells[4] === store.currentGame.cells[7] && store.currentGame.cells[7] === 'X') ||
+    (store.currentGame.cells[2] === store.currentGame.cells[5] && store.currentGame.cells[5] === store.currentGame.cells[8] && store.currentGame.cells[8] === 'X') ||
+    (store.currentGame.cells[0] === store.currentGame.cells[4] && store.currentGame.cells[4] === store.currentGame.cells[8] && store.currentGame.cells[8] === 'X') ||
+    (store.currentGame.cells[2] === store.currentGame.cells[4] && store.currentGame.cells[4] === store.currentGame.cells[6] && store.currentGame.cells[6] === 'X')) {
+    $('h1').html('X Wins!')
+    $('.box').off('click', onClick)
+    return true
+  } else if ((store.currentGame.cells[0] === store.currentGame.cells[1] && store.currentGame.cells[1] === store.currentGame.cells[2] && store.currentGame.cells[2] === 'O') ||
+    (store.currentGame.cells[3] === store.currentGame.cells[4] && store.currentGame.cells[4] === store.currentGame.cells[5] && store.currentGame.cells[5] === 'O') ||
+    (store.currentGame.cells[6] === store.currentGame.cells[7] && store.currentGame.cells[7] === store.currentGame.cells[8] && store.currentGame.cells[8] === 'O') ||
+    (store.currentGame.cells[0] === store.currentGame.cells[3] && store.currentGame.cells[3] === store.currentGame.cells[6] && store.currentGame.cells[6] === 'O') ||
+    (store.currentGame.cells[1] === store.currentGame.cells[4] && store.currentGame.cells[4] === store.currentGame.cells[7] && store.currentGame.cells[7] === 'O') ||
+    (store.currentGame.cells[2] === store.currentGame.cells[5] && store.currentGame.cells[5] === store.currentGame.cells[8] && store.currentGame.cells[8] === 'O') ||
+    (store.currentGame.cells[0] === store.currentGame.cells[4] && store.currentGame.cells[4] === store.currentGame.cells[8] && store.currentGame.cells[8] === 'O') ||
+    (store.currentGame.cells[2] === store.currentGame.cells[4] && store.currentGame.cells[4] === store.currentGame.cells[6] && store.currentGame.cells[6] === 'O')) {
+    $('h1').html('O Wins!')
+    $('.box').off('click', onClick)
+    return true
+  } else if (counter === 9) {
+    $('h1').html('It\'s a Draw!')
+    $('.box').off('click', onClick)
+    return true
+  } else { return false }
 }
 
 const didYouWin = () => {
@@ -176,7 +146,6 @@ const turnX = (event) => {
   if ($(event.target).html() !== 'X' && $(event.target).html() !== 'O') {
     $(event.target).addClass('stay-red')
     $(event.target).html('X')
-    console.log('counter from turnX:', counter)
     $('#user-feedback').html('Now it\'s O\'s turn!')
     const gameEleIndex = $(event.target).data('cell-index')
     const gameEleValue = 'X' // $(event.target).html()
@@ -186,11 +155,9 @@ const turnX = (event) => {
           index: gameEleIndex,
           value: gameEleValue
         },
-        over: false // winOptions(store.currentGame.cells)
+        over: winOptions()
       }
     }
-    console.log('gameEleIndex from turnX:', gameEleIndex)
-    console.log('newMove from turX:', newMove)
     api.updateGame(store.currentGame.id, newMove)
       .then(ui.updateGameSuccess)
       .then(didYouWin)
@@ -202,8 +169,6 @@ const turnO = (event) => {
   if ($(event.target).html() !== 'X' && $(event.target).html() !== 'O') {
     $(event.target).addClass('stay-blue')
     $(event.target).html('O')
-    console.log('counter from turnO:', counter)
-    console.log('turnO ran!')
     // onUpdateGame(event)
     $('#user-feedback').html('Now it\'s X\'s turn!')
     const gameEleIndex = $(event.target).data('cell-index')
@@ -214,11 +179,9 @@ const turnO = (event) => {
           index: gameEleIndex,
           value: gameEleValue
         },
-        over: false // winOptions(store.currentGame.cells)
+        over: winOptions()
       }
     }
-    console.log('gameEleIndex from turnO:', gameEleIndex)
-    console.log('newMove from turnO:', newMove)
     api.updateGame(store.currentGame.id, newMove)
       .then(ui.updateGameSuccess)
       .then(didYouWin)
@@ -234,7 +197,6 @@ const onClick = (event) => {
   //   didYouWin()
   // }
   clickTracker()
-  console.log('winOptions: ' + winOptions())
 }
 
 const startGame = (event) => {
@@ -244,7 +206,7 @@ const startGame = (event) => {
   $('.box').removeClass('stay-blue')
   $('h1').html('Tic-Tac-Toe')
   $('#user-feedback').html('')
-  console.log('startGame was called!')
+  $('.box').on('click', onClick)
   onCreateGame()
 }
 

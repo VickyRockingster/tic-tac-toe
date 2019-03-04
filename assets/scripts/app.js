@@ -10,7 +10,7 @@ const authEvents = require('./authenticate/events.js')
 
 $(() => {
   authEvents.addHandlers()
-  // $('.box').hover(events.onMouseEnter, events.onMouseLeave)
+  $('.box').hover(events.onMouseEnter, events.onMouseLeave)
   $('.box').one('click', events.onClick)
   $('#start-game').on('click', events.startGame)
   $('#account').on('submit', events.showAccountPage)

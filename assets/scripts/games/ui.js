@@ -9,15 +9,12 @@ const getGamesSuccess = function (data) {
 }
 
 const getGameSuccess = function (data) {
-  console.log(data)
-  console.log(data.game)
-  console.log(store.recentGame)
   store.recentGame = data.game
   $('#user-feedback').html('This is your most recent game!')
   $('#display-games').html(JSON.stringify(store.recentGame))
-  console.log(data)
-  console.log(data.game)
-  console.log(store.recentGame)
+  console.log('from getGameSuccess-data: ' + data)
+  console.log('from getGameSuccess-data.game: ' + data.game)
+  console.log('from getGameSuccess-store.recentGame ' + store.recentGame)
 }
 
 const createGameSuccess = function (data) {
@@ -28,7 +25,7 @@ const createGameSuccess = function (data) {
     $('#user-feedback').html('')
     $('#user-feedback').removeClass('stay-blue')
   }, 3000)
-  console.log('from createGameSuccess-store.currentGame: ' + JSON.stringify(store.currentGame))
+  console.log('from createGameSuccess-store.currentGame: ' + (store.currentGame))
   console.log('from createGameSuccess-store.currentGame.id: ' + store.currentGame.id)
   return store.currentGame.id
 }
@@ -36,8 +33,11 @@ const createGameSuccess = function (data) {
 const updateGameSuccess = function (data) {
   store.currentGame = data.game
   const gameArray = store.currentGame.cells
-  console.log('from updateGameSuccess, gameArray:' + JSON.stringify(gameArray))
-  console.log('from updateGameSuccess, store.currentGame.cells:' + JSON.stringify(store.currentGame.cells))
+  store.gameArray = gameArray
+  console.log('from updateGameSuccess, gameArray:' + (gameArray))
+  console.log('from updateGameSuccess, type of gameArray:' + (Array.isArray(gameArray)))
+  console.log('from updateGameSuccess, store.currentGame.cells:' + store.currentGame.cells)
+  console.log('from updateGameSuccess, store.currentGame.over:' + store.currentGame.over)
   return gameArray
 }
 

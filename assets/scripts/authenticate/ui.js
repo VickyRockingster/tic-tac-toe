@@ -1,4 +1,5 @@
 const store = require('../store.js')
+const events = require('../games/events.js')
 
 const signUpSuccess = function () {
   $('#user-feedback').html('You have successfully signed up!')
@@ -19,6 +20,7 @@ const signInSuccess = function (data) {
   $('#game-page').addClass('hidden')
   $('main').removeClass('hidden')
   $('section').addClass('hidden')
+  $('.box').off('click', events.onClick)
   setTimeout(() => {
     $('#user-feedback').html('')
     $('#user-feedback').removeClass('error')
