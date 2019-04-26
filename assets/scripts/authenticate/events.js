@@ -50,7 +50,7 @@ const onChangePassword = (event) => {
 const addHandlers = function () {
   $('#sign-up').on('submit', onSignUp)
   $('#sign-in').on('submit', onSignIn)
-  $('#sign-out').on('submit', onSignOut)
+  $('#sign-out-button').on('submit', onSignOut)
   $('#change-password').on('submit', onChangePassword)
 }
 

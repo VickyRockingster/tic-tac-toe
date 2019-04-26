@@ -1,89 +1,87 @@
 <!DOCTYPE html>
 <html>
-    <head>
-      <title>Tic-Tac-Toe</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <title>Tic-Tac-Toe</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-      <!-- Do not add `link` tags-->
-      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <!-- Do not add `link` tags-->
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 
-      <!-- Do not add `script` tags-->
-      <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
-      <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
-    </head>
-    <body>
-      <header>
-        <nav class="hidden">
-          <form id="sign-out">
-           <button type="submit" value="Sign Out">Sign Out</button>
-          </form>
-          <form id="account">
-            <button type="submit" value="Account">Account</button>
-          </form>
-          <form id="game-page">
-            <button type="submit" value="Show Game Page">Game</button>
-          </form>
-        </nav>
-        <h1>Tic-Tac-Toe</h1>
-      </header>
-        <p class="user-feedback" id="user-feedback"></p>
-        <section class="front-page">
-          <h3 class="sign-up">SIGN UP</h3>
-          <form id="sign-up">
-            <label for="signup-email">Email</label>
-            <input name="credentials[email]" type="text" placeholder="Email">
-            <label for="signup-password">Password</label>
-            <input name="credentials[password]" type="password" placeholder="Password">
-            <label for="signup-email">Password Confirmation</label>
-            <input name="credentials[password_confirmation]" type="password" placeholder="Confirm Password">
-            <button type="submit" value="Sign Up">Sign Up</button>
-          </form>
-          <h3>SIGN IN</h3>
-          <form id="sign-in">
-            <label for="signin-email">Email</label>
-            <input name="credentials[email]" type="text" placeholder="Email">
-            <label for="signin-password">Password</label>
-            <input name="credentials[password]" type="password" placeholder="Password">
-            <button type="submit" value="Sign In">Sign In</button>
-          </form>
-      </section>
-      <main class="container hidden">
-        <button type="button" id="start-game">PRESS TO START NEW GAME</button>
-        <div class="row">
-          <div class="box col-4" data-cell-index="0" id="0"></div>
-          <div class="box col-4" data-cell-index="1" id="1"></div>
-          <div class="box col-4" data-cell-index="2" id="2"></div>
-        </div>
-        <div class="row">
-          <div class="box col-4" data-cell-index="3" id="3"></div>
-          <div class="box col-4" data-cell-index="4" id="4"></div>
-          <div class="box col-4" data-cell-index="5" id="5"></div>
-        </div>
-        <div class="row">
-          <div class="box col-4" data-cell-index="6" id="6"></div>
-          <div class="box col-4" data-cell-index="7" id="7"></div>
-          <div class="box col-4" data-cell-index="8" id="8"></div>
-        </div>
-      </main>
-      <section class="account hidden">
-        <h3 id="change-password-heading" >CHANGE PASSWORD</h3>
-        <form id="change-password">
-          <label class="email">''</label>
-          <label>Old Password</label>
-          <input name="passwords[old]" type="password" placeholder="Old Password">
-          <label>New Password</label>
-          <input name="passwords[new]" type="password" placeholder="New Password">
-          <button type="submit" value="Change Password">Submit</button>
+    <!-- Do not add `script` tags-->
+    <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+    <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand fixed-top justify-content-end navbar-dark bg-dark">
+      <form class="px-2 form-inline" id="sign-out-button">
+        <button class="btn" type="submit" value="Sign Out">Sign Out</button>
+      </form>
+      <form class="px-2 form-inline" id="account-button">
+        <button class="btn" type="submit" value="Account">Account</button>
+      </form>
+      <form class="px-2 form-inline" id="game-page-button">
+        <button class="btn" type="submit" value="Show Game Page">Game</button>
+      </form>
+    </nav>
+    <h1>Tic-Tac-Toe</h1>
+      <p class="user-feedback" id="user-feedback"></p>
+      <section class="front-page">
+        <h3 class="sign-up">SIGN UP</h3>
+        <form id="sign-up">
+          <label for="signup-email">Email</label>
+          <input name="credentials[email]" type="text" placeholder="Email">
+          <label for="signup-password">Password</label>
+          <input name="credentials[password]" type="password" placeholder="Password">
+          <label for="signup-email">Password Confirmation</label>
+          <input name="credentials[password_confirmation]" type="password" placeholder="Confirm Password">
+          <button type="submit" value="Sign Up">Sign Up</button>
         </form>
-        <form id="get-game">
-          <button type="submit" value="Get Game">Recent Game</button>
+        <h3>SIGN IN</h3>
+        <form id="sign-in">
+          <label for="signin-email">Email</label>
+          <input name="credentials[email]" type="text" placeholder="Email">
+          <label for="signin-password">Password</label>
+          <input name="credentials[password]" type="password" placeholder="Password">
+          <button type="submit" value="Sign In">Sign In</button>
         </form>
-        <form id="get-games">
-          <button type="submit" value="Get Games">All Games</button>
-        </form>
-      </section>
-      <div class="display" id="display-games"></div>
-    </body>
+    </section>
+    <main class="container hidden">
+      <button type="button" id="start-game">PRESS TO START NEW GAME</button>
+      <div class="row">
+        <div class="box col-4" data-cell-index="0" id="0"></div>
+        <div class="box col-4" data-cell-index="1" id="1"></div>
+        <div class="box col-4" data-cell-index="2" id="2"></div>
+      </div>
+      <div class="row">
+        <div class="box col-4" data-cell-index="3" id="3"></div>
+        <div class="box col-4" data-cell-index="4" id="4"></div>
+        <div class="box col-4" data-cell-index="5" id="5"></div>
+      </div>
+      <div class="row">
+        <div class="box col-4" data-cell-index="6" id="6"></div>
+        <div class="box col-4" data-cell-index="7" id="7"></div>
+        <div class="box col-4" data-cell-index="8" id="8"></div>
+      </div>
+    </main>
+    <section class="account hidden">
+      <h3 id="change-password-heading">CHANGE PASSWORD</h3>
+      <form id="change-password">
+        <label class="email">''</label>
+        <label>Old Password</label>
+        <input name="passwords[old]" type="password" placeholder="Old Password">
+        <label>New Password</label>
+        <input name="passwords[new]" type="password" placeholder="New Password">
+        <button type="submit" value="Change Password">Submit</button>
+      </form>
+      <form id="get-game">
+        <button type="submit" value="Get Game">Recent Game</button>
+      </form>
+      <form id="get-games">
+        <button type="submit" value="Get Games">All Games</button>
+      </form>
+    </section>
+    <div class="display" id="display-games"></div>
+  </body>
 </html>
 
 <!-- extras:
