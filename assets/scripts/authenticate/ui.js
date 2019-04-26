@@ -1,18 +1,13 @@
 const store = require('../store.js')
 const events = require('../games/events.js')
 
-const signUpSuccess = function () {
-  $('#user-feedback').html('You have successfully signed up!')
-  $('#sign-up').trigger('reset')
-  setTimeout(() => {
-    $('#user-feedback').html('')
-  }, 3000)
-}
-
 const signInSuccess = function (data) {
-  $('#user-feedback').html('You have successfully signed in!')
+  $('#user-feedback').html('Welcome! You have successfully signed in!')
+  $('#sign-up').trigger('reset')
   $('#sign-in').trigger('reset')
   store.user = data.user
+  console.log('from sign in success, store.user:')
+  console.log(store.user)
   $('nav').removeClass('hidden')
   $('#game-page').addClass('hidden')
   $('main').removeClass('hidden')
@@ -57,7 +52,6 @@ const failure = function () {
 }
 
 module.exports = {
-  signUpSuccess,
   signInSuccess,
   signOutSuccess,
   changePasswordSuccess,

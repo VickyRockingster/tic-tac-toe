@@ -9,7 +9,7 @@ const onSignUp = (event) => {
   const credentials = getFormFields(event.target)
 
   authApi.signUp(credentials)
-    .then(() => authApi.signIn)
+    .then(() => authApi.signIn(credentials))
     .then(authUi.signInSuccess)
     .catch(authUi.failure)
 }
