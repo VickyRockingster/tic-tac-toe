@@ -38,18 +38,9 @@ const changePassword = function (passwords) {
   })
 }
 
-// const accountInfo = function (credentials) {
-//   return $.ajax({
-//     url: config.apiUrl + '/sign-in',
-//     method: 'GET',
-//     data: credentials
-//   })
-// }
-
 module.exports = {
   signUp,
   signIn,
   signOut,
   changePassword
-  // accountInfo
 }
