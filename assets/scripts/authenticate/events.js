@@ -47,11 +47,23 @@ const onChangePassword = (event) => {
     .catch(authUi.failure)
 }
 
+const signUpShow = () => {
+  $('#sign-in-div').hide()
+  $('#sign-up-div').fadeIn(800)
+}
+
+const signInShow = () => {
+  $('#sign-up-div').hide()
+  $('#sign-in-div').fadeIn(800)
+}
+
 const addHandlers = function () {
-  $('#sign-up').on('submit', onSignUp)
-  $('#sign-in').on('submit', onSignIn)
+  $('#sign-up-form').on('submit', onSignUp)
+  $('#sign-in-form').on('submit', onSignIn)
   $('#sign-out-button').on('submit', onSignOut)
   $('#change-password').on('submit', onChangePassword)
+  $('.sign-up-toggle').on('click', signUpShow)
+  $('.sign-in-toggle').on('click', signInShow)
 }
 
 module.exports = {

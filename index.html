@@ -12,7 +12,7 @@
     <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
   </head>
   <body>
-    <nav class="navbar navbar-expand fixed-top justify-content-end navbar-dark bg-dark">
+    <nav class="hidden navbar navbar-expand fixed-top justify-content-end navbar-dark bg-dark">
       <form class="px-2 form-inline" id="sign-out-button">
         <button class="btn" type="submit" value="Sign Out">Sign Out</button>
       </form>
@@ -23,30 +23,87 @@
         <button class="btn" type="submit" value="Show Game Page">Game</button>
       </form>
     </nav>
+    <p class="user-feedback" id="user-feedback"></p>
+    <section class="authentication-page-view">
+      <!-- <h3>SIGN UP</h3>
+      <form id="sign-up-form">
+        <label for="signup-email">Email</label>
+        <input name="credentials[email]" type="text" placeholder="Email">
+        <label for="signup-password">Password</label>
+        <input name="credentials[password]" type="password" placeholder="Password">
+        <label for="signup-email">Password Confirmation</label>
+        <input name="credentials[password_confirmation]" type="password" placeholder="Confirm Password">
+        <button type="submit" value="Sign Up">Sign Up</button>
+      </form> -->
+      <!-- <h3>SIGN IN</h3>
+      <form id="sign-in-form">
+        <label for="signin-email">Email</label>
+        <input name="credentials[email]" type="text" placeholder="Email">
+        <label for="signin-password">Password</label>
+        <input name="credentials[password]" type="password" placeholder="Password">
+        <button type="submit" value="Sign In">Sign In</button>
+      </form> -->
+      <div class="container" id="sign-up-div">
+        <div class="row">
+          <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card card-signup my-5">
+              <div class="card-body">
+                <h5 class="card-title text-center">Sign Up</h5>
+                <form class="form-signup" id="sign-up-form">
+                  <div class="form-label-group">
+                    <input name="credentials[email]" type="email" id="sign-up-email" class="form-control" placeholder="Email Address" required autofocus>
+                    <label for="sign-up-email">Email address</label>
+                  </div>
+
+                  <div class="form-label-group">
+                    <input name="credentials[password]" type="password" id="sign-up-password" class="form-control" placeholder="Password" required>
+                    <label for="sign-up-password">Password</label>
+                  </div>
+                  <div class="form-label-group">
+                    <input name="credentials[password_confirmation]" type="password" id="sign-up-password-confirmation" class="form-control" placeholder="Confirm Password" required>
+                    <label for="sign-up-password-confirmation">Password</label>
+                  </div>
+                  <button class="btn btn-block text-uppercase" type="submit">Sign Up</button>
+                  <hr class="my-4">
+                  <span class="pl-4 pr-2">Already have an account?</span><span class="sign-in-toggle">Sign In</span>
+
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container" id="sign-in-div">
+        <div class="row">
+          <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card card-signin my-5">
+              <div class="card-body">
+                <h5 class="card-title text-center">Sign In</h5>
+                <form class="form-signin" id="sign-in-form">
+                  <div class="form-label-group">
+                    <input name="credentials[email]" type="email" id="sign-in-email" class="form-control" placeholder="Email address" required autofocus>
+                    <label for="sign-in-email">Email address</label>
+                  </div>
+
+                  <div class="form-label-group">
+                    <input name="credentials[password]" type="password" id="sign-in-password" class="form-control" placeholder="Password" required>
+                    <label for="sign-in-password">Password</label>
+                  </div>
+                  <button class="btn btn-block text-uppercase" type="submit">Sign in</button>
+                  <hr class="my-4">
+                  <span class="pl-4 pr-2">Don't have an account?</span><span class="sign-up-toggle">Sign Up</span>
+
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </section>
+  <section class="game-page-view hidden">
     <h1>Tic-Tac-Toe</h1>
-      <p class="user-feedback" id="user-feedback"></p>
-      <section class="front-page">
-        <h3 class="sign-up">SIGN UP</h3>
-        <form id="sign-up">
-          <label for="signup-email">Email</label>
-          <input name="credentials[email]" type="text" placeholder="Email">
-          <label for="signup-password">Password</label>
-          <input name="credentials[password]" type="password" placeholder="Password">
-          <label for="signup-email">Password Confirmation</label>
-          <input name="credentials[password_confirmation]" type="password" placeholder="Confirm Password">
-          <button type="submit" value="Sign Up">Sign Up</button>
-        </form>
-        <h3>SIGN IN</h3>
-        <form id="sign-in">
-          <label for="signin-email">Email</label>
-          <input name="credentials[email]" type="text" placeholder="Email">
-          <label for="signin-password">Password</label>
-          <input name="credentials[password]" type="password" placeholder="Password">
-          <button type="submit" value="Sign In">Sign In</button>
-        </form>
-    </section>
-    <main class="container hidden">
-      <button type="button" id="start-game">PRESS TO START NEW GAME</button>
+    <button type="button" id="start-game-button">PRESS TO START NEW GAME</button>
+    <div class="container">
       <div class="row">
         <div class="box col-4" data-cell-index="0" id="0"></div>
         <div class="box col-4" data-cell-index="1" id="1"></div>
@@ -62,25 +119,26 @@
         <div class="box col-4" data-cell-index="7" id="7"></div>
         <div class="box col-4" data-cell-index="8" id="8"></div>
       </div>
-    </main>
-    <section class="account hidden">
-      <h3 id="change-password-heading">CHANGE PASSWORD</h3>
-      <form id="change-password">
-        <label class="email">''</label>
-        <label>Old Password</label>
-        <input name="passwords[old]" type="password" placeholder="Old Password">
-        <label>New Password</label>
-        <input name="passwords[new]" type="password" placeholder="New Password">
-        <button type="submit" value="Change Password">Submit</button>
-      </form>
-      <form id="get-game">
-        <button type="submit" value="Get Game">Recent Game</button>
-      </form>
-      <form id="get-games">
-        <button type="submit" value="Get Games">All Games</button>
-      </form>
-    </section>
-    <div class="display" id="display-games"></div>
+    </div>
+  </section>
+  <section class="account hidden">
+    <h3 id="change-password-heading">CHANGE PASSWORD</h3>
+    <form id="change-password">
+      <label class="email">''</label>
+      <label>Old Password</label>
+      <input name="passwords[old]" type="password" placeholder="Old Password">
+      <label>New Password</label>
+      <input name="passwords[new]" type="password" placeholder="New Password">
+      <button type="submit" value="Change Password">Submit</button>
+    </form>
+    <form id="get-game">
+      <button type="submit" value="Get Game">Recent Game</button>
+    </form>
+    <form id="get-games">
+      <button type="submit" value="Get Games">All Games</button>
+    </form>
+  </section>
+  <div class="display" id="display-games"></div>
   </body>
 </html>
 

@@ -9,9 +9,9 @@ const signInSuccess = function (data) {
   console.log('from sign in success, store.user:')
   console.log(store.user)
   $('nav').removeClass('hidden')
-  $('#game-page').addClass('hidden')
-  $('main').removeClass('hidden')
-  $('section').addClass('hidden')
+  $('#game-page-button').hide()
+  $('.game-page-view').removeClass('hidden')
+  $('.authentication-page-view').hide()
   $('.box').off('click', events.onClick)
   setTimeout(() => {
     $('#user-feedback').html('')
@@ -19,14 +19,17 @@ const signInSuccess = function (data) {
 }
 
 const signOutSuccess = function (data) {
-  $('#user-feedback').html('You have successfully signed out!')
-  $('#sign-out').trigger('reset')
+  $('#user-feedback').html('Come back soon!')
+  // $('#sign-out').trigger('reset')
   store.user = null
-  $('h1').html('Tic-Tac-Toe')
+  // $('h1').html('Tic-Tac-Toe')
   $('section').removeClass('hidden')
   $('.account').addClass('hidden')
-  $('main').addClass('hidden')
-  $('nav').addClass('hidden')
+  // $('main').addClass('hidden')
+  $('.authentication-page-view').show()
+  // $('nav').addClass('hidden')
+  $('nav').hide()
+  $('.game-page-view').hide()
   $('#display-games').html('')
   setTimeout(() => {
     $('#user-feedback').html('')
