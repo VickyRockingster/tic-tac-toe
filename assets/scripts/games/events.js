@@ -5,40 +5,44 @@ const store = require('../store.js')
 const onGetGames = (event) => {
   event.preventDefault()
   api.getGames()
+
     .then(ui.getGamesSuccess)
     .catch(ui.failure)
 }
 
 const onGetGame = (event) => {
   event.preventDefault()
+
   api.getGame(store.currentGame.id)
     .then(ui.getGameSuccess)
     .catch(ui.failure)
 }
 
-// hides the board and shows the "page" to get 1 or all games/change password
+// hides the game page-view and shows the page-view to get 1 or all games or change password
 const showAccountPage = (event) => {
   event.preventDefault()
+
   const email = store.user.email
-  $('h1').html('Tic-Tac-Toe')
-  $('.account').removeClass('hidden')
-  $('#account').addClass('hidden')
-  $('#game-page').removeClass('hidden')
-  $('main').addClass('hidden')
   $('.email').html('Email: ' + email)
   $('.email').addClass('header')
+
+  $('.account-page-view').show()
+  $('.game-page-view').hide()
+  $('.authentication-page-view').hide()
+  $('#account-button').hide()
+  $('#game-page-button').show()
   $('#user-feedback').html('')
 }
 
-// hides the account "page "and shows the "page" to play the game
+// hides the account page-view and shows the page-view to play the game
 const showGamePage = (event) => {
   event.preventDefault()
-  $('main').removeClass('hidden')
-  $('section').addClass('hidden')
-  $('#game-page').addClass('hidden')
-  $('#account').removeClass('hidden')
+  $('.game-page-view').show()
+  $('.account-page-view').hide()
+  $('.authentication-page-view').hide()
+  $('#account-button').show()
+  $('#game-page-button').hide()
   $('#user-feedback').html('')
-  $('#display-games').html('')
 }
 
 // tracks whose turn it is by tracking how many clicks
