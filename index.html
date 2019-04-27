@@ -25,25 +25,7 @@
     </nav>
     <p class="user-feedback" id="user-feedback"></p>
     <section class="authentication-page-view">
-      <!-- <h3>SIGN UP</h3>
-      <form id="sign-up-form">
-        <label for="signup-email">Email</label>
-        <input name="credentials[email]" type="text" placeholder="Email">
-        <label for="signup-password">Password</label>
-        <input name="credentials[password]" type="password" placeholder="Password">
-        <label for="signup-email">Password Confirmation</label>
-        <input name="credentials[password_confirmation]" type="password" placeholder="Confirm Password">
-        <button type="submit" value="Sign Up">Sign Up</button>
-      </form> -->
-      <!-- <h3>SIGN IN</h3>
-      <form id="sign-in-form">
-        <label for="signin-email">Email</label>
-        <input name="credentials[email]" type="text" placeholder="Email">
-        <label for="signin-password">Password</label>
-        <input name="credentials[password]" type="password" placeholder="Password">
-        <button type="submit" value="Sign In">Sign In</button>
-      </form> -->
-      <div class="container" id="sign-up-div">
+      <div class="container hidden" id="sign-up-div">
         <div class="row">
           <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
             <div class="card card-signup my-5">
@@ -54,7 +36,6 @@
                     <input name="credentials[email]" type="email" id="sign-up-email" class="form-control" placeholder="Email Address" required autofocus>
                     <label for="sign-up-email">Email address</label>
                   </div>
-
                   <div class="form-label-group">
                     <input name="credentials[password]" type="password" id="sign-up-password" class="form-control" placeholder="Password" required>
                     <label for="sign-up-password">Password</label>
@@ -66,13 +47,13 @@
                   <button class="btn btn-block text-uppercase" type="submit">Sign Up</button>
                   <hr class="my-4">
                   <span class="pl-4 pr-2">Already have an account?</span><span class="sign-in-toggle">Sign In</span>
-
                 </form>
               </div>
             </div>
           </div>
         </div>
       </div>
+
       <div class="container" id="sign-in-div">
         <div class="row">
           <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
@@ -84,7 +65,6 @@
                     <input name="credentials[email]" type="email" id="sign-in-email" class="form-control" placeholder="Email address" required autofocus>
                     <label for="sign-in-email">Email address</label>
                   </div>
-
                   <div class="form-label-group">
                     <input name="credentials[password]" type="password" id="sign-in-password" class="form-control" placeholder="Password" required>
                     <label for="sign-in-password">Password</label>
@@ -92,53 +72,52 @@
                   <button class="btn btn-block text-uppercase" type="submit">Sign in</button>
                   <hr class="my-4">
                   <span class="pl-4 pr-2">Don't have an account?</span><span class="sign-up-toggle">Sign Up</span>
-
                 </form>
               </div>
             </div>
           </div>
         </div>
       </div>
-  </section>
-  <section class="game-page-view hidden">
-    <h1>Tic-Tac-Toe</h1>
-    <button type="button" id="start-game-button">PRESS TO START NEW GAME</button>
-    <div class="container">
-      <div class="row">
-        <div class="box col-4" data-cell-index="0" id="0"></div>
-        <div class="box col-4" data-cell-index="1" id="1"></div>
-        <div class="box col-4" data-cell-index="2" id="2"></div>
+    </section>
+    <section class="game-page-view hidden">
+      <h1>Tic-Tac-Toe</h1>
+      <button type="button" id="start-game-button">PRESS TO START NEW GAME</button>
+      <div class="container">
+        <div class="row">
+          <div class="box col-4" data-cell-index="0" id="0"></div>
+          <div class="box col-4" data-cell-index="1" id="1"></div>
+          <div class="box col-4" data-cell-index="2" id="2"></div>
+        </div>
+        <div class="row">
+          <div class="box col-4" data-cell-index="3" id="3"></div>
+          <div class="box col-4" data-cell-index="4" id="4"></div>
+          <div class="box col-4" data-cell-index="5" id="5"></div>
+        </div>
+        <div class="row">
+          <div class="box col-4" data-cell-index="6" id="6"></div>
+          <div class="box col-4" data-cell-index="7" id="7"></div>
+          <div class="box col-4" data-cell-index="8" id="8"></div>
+        </div>
       </div>
-      <div class="row">
-        <div class="box col-4" data-cell-index="3" id="3"></div>
-        <div class="box col-4" data-cell-index="4" id="4"></div>
-        <div class="box col-4" data-cell-index="5" id="5"></div>
-      </div>
-      <div class="row">
-        <div class="box col-4" data-cell-index="6" id="6"></div>
-        <div class="box col-4" data-cell-index="7" id="7"></div>
-        <div class="box col-4" data-cell-index="8" id="8"></div>
-      </div>
-    </div>
-  </section>
-  <section class="account hidden">
-    <h3 id="change-password-heading">CHANGE PASSWORD</h3>
-    <form id="change-password">
-      <label class="email">''</label>
-      <label>Old Password</label>
-      <input name="passwords[old]" type="password" placeholder="Old Password">
-      <label>New Password</label>
-      <input name="passwords[new]" type="password" placeholder="New Password">
-      <button type="submit" value="Change Password">Submit</button>
-    </form>
-    <form id="get-game">
-      <button type="submit" value="Get Game">Recent Game</button>
-    </form>
-    <form id="get-games">
-      <button type="submit" value="Get Games">All Games</button>
-    </form>
-  </section>
-  <div class="display" id="display-games"></div>
+    </section>
+    <section class="account hidden">
+      <h3 id="change-password-heading">CHANGE PASSWORD</h3>
+      <form id="change-password-form">
+        <label class="email">''</label>
+        <label>Old Password</label>
+        <input name="passwords[old]" type="password" placeholder="Old Password">
+        <label>New Password</label>
+        <input name="passwords[new]" type="password" placeholder="New Password">
+        <button type="submit" value="Change Password">Submit</button>
+      </form>
+      <form id="get-game">
+        <button type="submit" value="Get Game">Recent Game</button>
+      </form>
+      <form id="get-games">
+        <button type="submit" value="Get Games">All Games</button>
+      </form>
+    </section>
+    <div class="display" id="display-games"></div>
   </body>
 </html>
 

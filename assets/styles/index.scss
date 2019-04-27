@@ -239,7 +239,7 @@ body {
 .sign-in-toggle,
 .sign-up-toggle {
   color: blue;
-  // user-select: none;
+  user-select: none;
   &:hover {
     color: $red;
     text-decoration: underline;

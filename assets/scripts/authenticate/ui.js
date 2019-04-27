@@ -2,16 +2,18 @@ const store = require('../store.js')
 const events = require('../games/events.js')
 
 const signInSuccess = function (data) {
-  $('#user-feedback').html('Welcome! You have successfully signed in!')
-  $('#sign-up').trigger('reset')
-  $('#sign-in').trigger('reset')
+  $('#user-feedback').html('Welcome!')
+  $('#sign-up-form').trigger('reset')
+  $('#sign-in-form').trigger('reset')
   store.user = data.user
-  console.log('from sign in success, store.user:')
-  console.log(store.user)
   $('nav').removeClass('hidden')
-  $('#game-page-button').hide()
+  $('nav').show()
   $('.game-page-view').removeClass('hidden')
+  $('.game-page-view').show()
   $('.authentication-page-view').hide()
+
+  $('#game-page-button').hide()
+
   $('.box').off('click', events.onClick)
   setTimeout(() => {
     $('#user-feedback').html('')
@@ -20,17 +22,14 @@ const signInSuccess = function (data) {
 
 const signOutSuccess = function (data) {
   $('#user-feedback').html('Come back soon!')
-  // $('#sign-out').trigger('reset')
   store.user = null
-  // $('h1').html('Tic-Tac-Toe')
-  $('section').removeClass('hidden')
-  $('.account').addClass('hidden')
-  // $('main').addClass('hidden')
   $('.authentication-page-view').show()
-  // $('nav').addClass('hidden')
   $('nav').hide()
   $('.game-page-view').hide()
+
+  $('.account').addClass('hidden')
   $('#display-games').html('')
+
   setTimeout(() => {
     $('#user-feedback').html('')
   }, 3000)
@@ -38,7 +37,7 @@ const signOutSuccess = function (data) {
 
 const changePasswordSuccess = function () {
   $('#user-feedback').html('You have successfully changed your password!')
-  $('form').trigger('reset')
+  $('#change-password-form').trigger('reset')
   setTimeout(() => {
     $('#user-feedback').html('')
   }, 3000)

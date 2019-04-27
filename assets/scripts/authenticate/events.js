@@ -53,6 +53,7 @@ const signUpShow = () => {
 }
 
 const signInShow = () => {
+  $('#sign-up-div').removeClass('hidden')
   $('#sign-up-div').hide()
   $('#sign-in-div').fadeIn(800)
 }
