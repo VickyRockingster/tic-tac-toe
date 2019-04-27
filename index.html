@@ -12,18 +12,15 @@
     <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
   </head>
   <body>
+
     <nav class="hidden navbar navbar-expand fixed-top justify-content-end navbar-dark bg-dark">
-      <form class="px-2 form-inline" id="sign-out-button">
-        <button class="btn" type="submit" value="Sign Out">Sign Out</button>
-      </form>
-      <form class="px-2 form-inline" id="account-button">
-        <button class="btn" type="submit" value="Account">Account</button>
-      </form>
-      <form class="px-2 form-inline" id="game-page-button">
-        <button class="btn" type="submit" value="Show Game Page">Game</button>
-      </form>
+      <button class="btn mx-2 text-uppercase no-form-button" id="game-page-button" type="submit">Game</button>
+      <button class="btn mx-2 text-uppercase no-form-button" id="account-button" type="submit">Account</button>
+      <button class="btn mx-2 text-uppercase no-form-button" id="sign-out-button" type="submit">Sign Out</button>
     </nav>
+
     <p class="user-feedback" id="user-feedback"></p>
+
     <section class="authentication-page-view">
       <div class="container hidden" id="sign-up-div">
         <div class="row">
@@ -33,16 +30,16 @@
                 <h5 class="card-title text-center">Sign Up</h5>
                 <form class="form-signup" id="sign-up-form">
                   <div class="form-label-group">
-                    <input name="credentials[email]" type="email" id="sign-up-email" class="form-control" placeholder="Email Address" required autofocus>
+                    <input name="credentials[email]" type="email" id="sign-up-email" class="form-control" required autofocus>
                     <label for="sign-up-email">Email address</label>
                   </div>
                   <div class="form-label-group">
-                    <input name="credentials[password]" type="password" id="sign-up-password" class="form-control" placeholder="Password" required>
+                    <input name="credentials[password]" type="password" id="sign-up-password" class="form-control" required>
                     <label for="sign-up-password">Password</label>
                   </div>
                   <div class="form-label-group">
-                    <input name="credentials[password_confirmation]" type="password" id="sign-up-password-confirmation" class="form-control" placeholder="Confirm Password" required>
-                    <label for="sign-up-password-confirmation">Password</label>
+                    <input name="credentials[password_confirmation]" type="password" id="sign-up-password-confirmation" class="form-control" required>
+                    <label for="sign-up-password-confirmation">Confirm Password</label>
                   </div>
                   <button class="btn btn-block text-uppercase" type="submit">Sign Up</button>
                   <hr class="my-4">
@@ -79,6 +76,7 @@
         </div>
       </div>
     </section>
+
     <section class="game-page-view hidden">
       <h1>Tic-Tac-Toe</h1>
       <button type="button" id="start-game-button">PRESS TO START NEW GAME</button>
@@ -100,24 +98,34 @@
         </div>
       </div>
     </section>
-    <section class="account hidden">
-      <h3 id="change-password-heading">CHANGE PASSWORD</h3>
-      <form id="change-password-form">
-        <label class="email">''</label>
-        <label>Old Password</label>
-        <input name="passwords[old]" type="password" placeholder="Old Password">
-        <label>New Password</label>
-        <input name="passwords[new]" type="password" placeholder="New Password">
-        <button type="submit" value="Change Password">Submit</button>
+
+    <section class="account-page-view hidden">
+      <label class="email">''</label>
+      <form class="form-changepassword" id="change-password-form">
+        <div class="form-label-group px-2">
+          <input name="passwords[old]" type="password" id="old-password" placeholder="Old Password"required autofocus>
+          <label for="old-password">Old Password</label>
+        </div>
+        <div class="form-label-group px-2">
+          <input name="passwords[new]" type="password" id="new-password" placeholder="New Password"required>
+          <label for="new-password">New Password</label>
+        </div>
+        <button class="btn text-uppercase" type="submit">Change Password</button>
       </form>
-      <form id="get-game">
-        <button type="submit" value="Get Game">Recent Game</button>
-      </form>
-      <form id="get-games">
-        <button type="submit" value="Get Games">All Games</button>
-      </form>
+      <hr class="my-4">
+
+      <div class="account-button-group" >
+        <!-- <button type="submit" value="Get Game">Recent Game</button> -->
+        <button class="btn mx-3 text-uppercase no-form-button" id="get-game-button" type="submit">See Recent Game</button>
+        <!-- <button type="submit" value="Get Games">All Games</button> -->
+        <button class="btn mx-3 text-uppercase no-form-button" id="get-games-button" type="submit">See All Games</button>
+      </div>
+
+      <hr class="my-4">
+
+      <div class="display" id="display-games"></div>
     </section>
-    <div class="display" id="display-games"></div>
+
   </body>
 </html>
 

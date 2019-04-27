@@ -8,12 +8,14 @@ const signInSuccess = function (data) {
   store.user = data.user
   $('nav').removeClass('hidden')
   $('nav').show()
+  $('#game-page-button').hide()
+  $('#account-button').show()
+
   $('.game-page-view').removeClass('hidden')
   $('.game-page-view').show()
   $('.authentication-page-view').hide()
-
-  $('#game-page-button').hide()
-
+  $('.account-page-view').removeClass('hidden')
+  $('.account-page-view').hide()
   $('.box').off('click', events.onClick)
   setTimeout(() => {
     $('#user-feedback').html('')
@@ -26,8 +28,7 @@ const signOutSuccess = function (data) {
   $('.authentication-page-view').show()
   $('nav').hide()
   $('.game-page-view').hide()
-
-  $('.account').addClass('hidden')
+  $('.account-page-view').hide()
   $('#display-games').html('')
 
   setTimeout(() => {
