@@ -184,19 +184,33 @@ const startGame = (event) => {
   clickTracker()
 }
 
-module.exports = {
-  onGetGame,
-  onGetGames,
-  showAccountPage,
-  showGamePage,
-  turnX,
-  turnO,
-  whoseTurn,
-  onMouseEnter,
-  onMouseLeave,
-  clickTracker,
-  onClick,
-  startGame,
-  winOptions,
-  didYouWin
+const addHandlers = function () {
+  $('.box').hover(onMouseEnter, onMouseLeave)
+  $('.box').one('click', onClick)
+  $('#start-game').on('click', startGame)
+  $('#account-button').on('click', showAccountPage)
+  $('#game-page-button').on('click', showGamePage)
+  $('#get-game-button').on('click', onGetGame)
+  $('#get-games-button').on('click', onGetGames)
 }
+
+module.exports = {
+  addHandlers
+}
+
+// module.exports = {
+//   onGetGame,
+//   onGetGames,
+//   showAccountPage,
+//   showGamePage,
+//   turnX,
+//   turnO,
+//   whoseTurn,
+//   onMouseEnter,
+//   onMouseLeave,
+//   clickTracker,
+//   onClick,
+//   startGame,
+//   winOptions,
+//   didYouWin
+// }
