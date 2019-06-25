@@ -11,9 +11,9 @@ const getGames = () => {
   })
 }
 
-const getGame = (ID) => {
+const getGame = (id) => {
   return $.ajax({
-    url: config.apiUrl + `/games/${ID}`,
+    url: config.apiUrl + `/games/${id}`,
     method: 'GET',
     headers: {
       Authorization: 'Token token=' + store.user.token

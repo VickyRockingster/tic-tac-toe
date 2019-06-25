@@ -7,8 +7,11 @@ const getGamesSuccess = function (data) {
 }
 
 const getGameSuccess = function (data) {
-  store.recentGame = data.game
-  $('#user-feedback').html(`Your most recent game is: ${store.recentGame.id}.`)
+  store.lastGame = data.game
+  $('#user-feedback').html(`Your most recent game is: ${store.lastGame.id}.`)
+
+  // store.recentGame = data.game
+  // $('#user-feedback').html(`Your most recent game is: ${store.recentGame.id}.`)
 }
 
 const createGameSuccess = function (data) {
@@ -23,7 +26,6 @@ const createGameSuccess = function (data) {
 const updateGameSuccess = function (data) {
   store.currentGame = data.game
   const gameArray = store.currentGame.cells
-  store.gameArray = gameArray
   return gameArray
 }
 
