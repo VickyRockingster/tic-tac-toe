@@ -72,7 +72,7 @@ const gameModel = {
       }
       api.updateGame(store.currentGame.id, newMove)
         .then(ui.updateGameSuccess)
-        // .then(didYouWin)
+        .then(gameModel.winOptions)
         .catch(ui.failure)
     }
   },
@@ -80,7 +80,6 @@ const gameModel = {
     if ($(event.target).html() !== 'X' && $(event.target).html() !== 'O') {
       $(event.target).addClass('stay-blue')
       $(event.target).html('O')
-      // onUpdateGame(event)
       $('#user-feedback').html('Now it\'s X\'s turn!')
       const gameEleIndex = $(event.target).data('cell-index')
       const gameEleValue = 'O'
@@ -95,7 +94,7 @@ const gameModel = {
       }
       api.updateGame(store.currentGame.id, newMove)
         .then(ui.updateGameSuccess)
-        // .then(didYouWin)
+        .then(gameModel.winOptions)
         .catch(ui.failure)
     }
   },
@@ -150,7 +149,7 @@ const startGame = (event) => {
   api.createGame()
     .then(ui.createGameSuccess)
     .catch(ui.failure)
-  gameModel.gameCounterIterator()
+  gameModel.gameCounter = 0
 }
 
 const addHandlers = function () {
