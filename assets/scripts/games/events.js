@@ -11,9 +11,12 @@ const onGetGames = (event) => {
 
 const onGetGame = (event) => {
   event.preventDefault()
-  // api.getGame(store.lastGame.id)
+
   console.log(`JSON stringified store: ${JSON.stringify(store)}`)
-  api.getGame(store.lastGame.id)
+
+  const gameId = $(event.target).data('cell-index')
+
+  api.getGame(gameId)
     .then(ui.getGameSuccess)
     .catch(ui.failure)
 }
@@ -191,7 +194,7 @@ const addHandlers = function () {
   $('.box').hover(gameModel.onMouseEnter, gameModel.onMouseLeave)
   $('.box').on('click', gameModel.onClick)
   $('#start-game-button').on('click', startGame)
-  $('#get-game-button').on('click', onGetGame)
+  $('.get-game-button').on('click', onGetGame)
   $('#get-games-button').on('click', onGetGames)
 }
 
