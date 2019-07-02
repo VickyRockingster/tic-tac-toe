@@ -1,21 +1,37 @@
 const store = require('../store.js')
+
 // const getFormFields = require('../../../lib/get-form-fields.js')
 
 const getGamesSuccess = function (data) {
   store.games = data.games
-  console.log(`data.games: ${data.games}`)
+  console.log(store.games)
 
-  $('#user-feedback').html(`You have played ${data.games.length} games!`)
+  $('#user-feedback').html(`You have played ${store.games.length} games!`)
   $('.display').html('')
   data.games.forEach(game => {
-    const allGames = (`
-    <h2>cells: ${game.cells}</h2>
-    <h3>id: ${game.id}</h3>
-    <p>over: ${game.over}</p>
-    <p>player O: ${game.player_o}</p>
-    <p>player X: ${game.player_x}</p>
+    const oneGame = (`
+      <div class="container">
+        <div class="row">
+          <div class="box col-4" data-cell-index="0">${game.cells[0]}</div>
+          <div class="box col-4" data-cell-index="1">${game.cells[1]}</div>
+          <div class="box col-4" data-cell-index="2">${game.cells[2]}</div>
+        </div>
+        <div class="row">
+          <div class="box col-4" data-cell-index="3">${game.cells[3]}</div>
+          <div class="box col-4" data-cell-index="4">${game.cells[4]}</div>
+          <div class="box col-4" data-cell-index="5">${game.cells[5]}</div>
+        </div>
+        <div class="row">
+          <div class="box col-4" data-cell-index="6">${game.cells[6]}</div>
+          <div class="box col-4" data-cell-index="7">${game.cells[7]}</div>
+          <div class="box col-4" data-cell-index="8">${game.cells[8]}</div>
+        </div>
+      </div>
+      <h2>Game: {{game.cells}}</h2>
+      <h3>Game No.: {{game.id}}</h3>
+      <p>Game Over?: {{game.over}}</p>
     `)
-    $('.display').append(allGames)
+    $('#display-games').append(oneGame)
   })
 }
 
