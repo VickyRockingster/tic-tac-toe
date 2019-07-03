@@ -7,6 +7,7 @@ const getGamesSuccess = function (data) {
 
   $('#user-feedback').html(`You have played ${store.games.length} games!`)
   $('#display-games').html('')
+  $('#display-game').html('')
 
   data.games.forEach(game => {
     const eachGame = (`
@@ -29,10 +30,8 @@ const getGamesSuccess = function (data) {
         </div>
       </div>
       <p>Game Over?: ${game.over}</p>
-      <form>
-        <button class="btn mx-3 text-uppercase get-game-button data-cell-index="${game.id}"
-        type="submit">Finish Game</button>
-      <form>
+      <button class="btn text-uppercase no-form-button get-game-button"
+      data-id="${game.id}" type="submit">Finish Game</button>
     `)
     $('#display-games').append(eachGame)
   })
@@ -42,7 +41,7 @@ const getGameSuccess = function (data) {
   store.lastGame = data.game
   $('#user-feedback').html(`Your most recent game is: ${store.lastGame.id}.`)
 
-  $('.display').html('')
+  $('#display-games').html('')
   const oneGame = (`
     <h3>Game No.: ${store.lastGame.id}</h3>
     <div class="container">
@@ -63,7 +62,7 @@ const getGameSuccess = function (data) {
       </div>
     </div>
    `)
-  $('#display-games').append(oneGame)
+  $('#display-game').append(oneGame)
 
   // store.recentGame = data.game
   // $('#user-feedback').html(`Your most recent game is: ${store.recentGame.id}.`)

@@ -4,6 +4,7 @@ const store = require('../store.js')
 
 const onGetGames = (event) => {
   event.preventDefault()
+
   api.getGames()
     .then(ui.getGamesSuccess)
     .catch(ui.failure)
@@ -11,10 +12,10 @@ const onGetGames = (event) => {
 
 const onGetGame = (event) => {
   event.preventDefault()
+  // event.stopPropogation()
+  // console.log(`JSON stringified store: ${JSON.stringify(store)}`)
 
-  console.log(`JSON stringified store: ${JSON.stringify(store)}`)
-
-  const gameId = $(event.target).data('cell-index')
+  const gameId = $(event.target).data('id')
 
   api.getGame(gameId)
     .then(ui.getGameSuccess)
@@ -194,7 +195,7 @@ const addHandlers = function () {
   $('.box').hover(gameModel.onMouseEnter, gameModel.onMouseLeave)
   $('.box').on('click', gameModel.onClick)
   $('#start-game-button').on('click', startGame)
-  $('.get-game-button').on('click', onGetGame)
+  $('#display-games').on('click', '.get-game-button', onGetGame)
   $('#get-games-button').on('click', onGetGames)
 }
 
