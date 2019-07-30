@@ -44,7 +44,7 @@ const gameModel = {
   // to see whose turn it is to turn the box blue or red
   onMouseEnter: event => {
     event.preventDefault()
-    if (!gameModel.didYouWin()) {
+    if (!gameModel.didYouWin() && $(event.target).html() === '') {
       gameModel.whoseTurn() ? $(event.target).addClass('turn-blue') : $(event.target).addClass('turn-red')
     }
   },
@@ -56,10 +56,9 @@ const gameModel = {
   takeTurns: event => {
     event.preventDefault()
     gameModel.whoseTurn() ? gameModel.turnO(event) : gameModel.turnX(event)
-    gameModel.gameCounterIterator()
   },
   turnX: event => {
-    if ($(event.target).html() !== 'X' && $(event.target).html() !== 'O') {
+    if ($(event.target).html() === '') {
       $(event.target).addClass('stay-red')
       $(event.target).html('X')
       const gameEleIndex = $(event.target).data('cell-index')
@@ -80,6 +79,7 @@ const gameModel = {
           boolean === false ? $('#user-feedback').html('Now it\'s O\'s turn!')
             : $('#user-feedback').html('')
         })
+        .then(gameModel.gameCounterIterator())
         .catch(ui.failure)
     }
   },
@@ -105,6 +105,7 @@ const gameModel = {
           boolean === false ? $('#user-feedback').html('Now it\'s X\'s turn!')
             : $('#user-feedback').html('')
         })
+        .then(gameModel.gameCounterIterator())
         .catch(ui.failure)
     }
   },
@@ -125,13 +126,6 @@ const gameModel = {
       $('.row').off('click', gameModel.onClick)
       $('h1').html('Game over; X Wins!')
       $('#start-game-button').show()
-
-      // setTimeout(() => {
-      //   $('.box').html('')
-      //   $('.box').removeClass('stay-red')
-      //   $('.box').removeClass('stay-blue')
-      //   $('h1').html('Tic-Tac-Toe')
-      // }, 3000)
       return true
     } else if ((store.currentGame.cells[0] === store.currentGame.cells[1] && store.currentGame.cells[1] === store.currentGame.cells[2] && store.currentGame.cells[2] === 'O') ||
     (store.currentGame.cells[3] === store.currentGame.cells[4] && store.currentGame.cells[4] === store.currentGame.cells[5] && store.currentGame.cells[5] === 'O') ||
@@ -144,25 +138,11 @@ const gameModel = {
       $('.row').off('click', gameModel.onClick)
       $('h1').html('Game over; O Wins!')
       $('#start-game-button').show()
-
-      // setTimeout(() => {
-      //   $('.box').html('')
-      //   $('.box').removeClass('stay-red')
-      //   $('.box').removeClass('stay-blue')
-      //   $('h1').html('Tic-Tac-Toe')
-      // }, 3000)
       return true
     } else if (gameModel.gameCounter === 9) {
       $('.row').off('click', gameModel.onClick)
       $('h1').html('Game Over! It\'s a Draw!')
       $('#start-game-button').show()
-
-      // setTimeout(() => {
-      //   $('.box').html('')
-      //   $('.box').removeClass('stay-red')
-      //   $('.box').removeClass('stay-blue')
-      //   $('h1').html('Tic-Tac-Toe')
-      // }, 3000)
       return true
     } else { return false }
   },
@@ -172,11 +152,6 @@ const gameModel = {
       api.createGame()
         .then(ui.createGameSuccess)
         .then(() => gameModel.turnX(event))
-        // .then(() => {
-        //   gameModel.gameCounter += 1
-        //   return gameModel.gameCounter
-        // })
-        .then(gameModel.gameCounterIterator())
         .then(console.log('clicked at the end!'))
         .catch(ui.failure)
     } else { gameModel.takeTurns(event) }
