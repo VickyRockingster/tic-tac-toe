@@ -122,15 +122,14 @@ const gameModel = {
     (store.currentGame.cells[2] === store.currentGame.cells[5] && store.currentGame.cells[5] === store.currentGame.cells[8] && store.currentGame.cells[8] === 'X') ||
     (store.currentGame.cells[0] === store.currentGame.cells[4] && store.currentGame.cells[4] === store.currentGame.cells[8] && store.currentGame.cells[8] === 'X') ||
     (store.currentGame.cells[2] === store.currentGame.cells[4] && store.currentGame.cells[4] === store.currentGame.cells[6] && store.currentGame.cells[6] === 'X')) {
-      $('h1').html('Game over; X Wins!')
       $('.row').off('click', gameModel.onClick)
-      // $('.row').off('hover', '.box', gameModel.onMouseEnter)
-      setTimeout(() => {
-        $('.box').html('')
-        $('.box').removeClass('stay-red')
-        $('.box').removeClass('stay-blue')
-        $('h1').html('Tic-Tac-Toe')
-      }, 3000)
+      $('h1').html('Game over; X Wins!')
+      // setTimeout(() => {
+      //   $('.box').html('')
+      //   $('.box').removeClass('stay-red')
+      //   $('.box').removeClass('stay-blue')
+      //   $('h1').html('Tic-Tac-Toe')
+      // }, 3000)
       return true
     } else if ((store.currentGame.cells[0] === store.currentGame.cells[1] && store.currentGame.cells[1] === store.currentGame.cells[2] && store.currentGame.cells[2] === 'O') ||
     (store.currentGame.cells[3] === store.currentGame.cells[4] && store.currentGame.cells[4] === store.currentGame.cells[5] && store.currentGame.cells[5] === 'O') ||
@@ -140,24 +139,24 @@ const gameModel = {
     (store.currentGame.cells[2] === store.currentGame.cells[5] && store.currentGame.cells[5] === store.currentGame.cells[8] && store.currentGame.cells[8] === 'O') ||
     (store.currentGame.cells[0] === store.currentGame.cells[4] && store.currentGame.cells[4] === store.currentGame.cells[8] && store.currentGame.cells[8] === 'O') ||
     (store.currentGame.cells[2] === store.currentGame.cells[4] && store.currentGame.cells[4] === store.currentGame.cells[6] && store.currentGame.cells[6] === 'O')) {
-      $('h1').html('Game over; O Wins!')
       $('.row').off('click', gameModel.onClick)
-      setTimeout(() => {
-        $('.box').html('')
-        $('.box').removeClass('stay-red')
-        $('.box').removeClass('stay-blue')
-        $('h1').html('Tic-Tac-Toe')
-      }, 3000)
+      $('h1').html('Game over; O Wins!')
+      // setTimeout(() => {
+      //   $('.box').html('')
+      //   $('.box').removeClass('stay-red')
+      //   $('.box').removeClass('stay-blue')
+      //   $('h1').html('Tic-Tac-Toe')
+      // }, 3000)
       return true
     } else if (gameModel.gameCounter === 9) {
-      $('h1').html('Game Over! It\'s a Draw!')
       $('.row').off('click', gameModel.onClick)
-      setTimeout(() => {
-        $('.box').html('')
-        $('.box').removeClass('stay-red')
-        $('.box').removeClass('stay-blue')
-        $('h1').html('Tic-Tac-Toe')
-      }, 3000)
+      $('h1').html('Game Over! It\'s a Draw!')
+      // setTimeout(() => {
+      //   $('.box').html('')
+      //   $('.box').removeClass('stay-red')
+      //   $('.box').removeClass('stay-blue')
+      //   $('h1').html('Tic-Tac-Toe')
+      // }, 3000)
       return true
     } else { return false }
   },
@@ -178,24 +177,27 @@ const gameModel = {
   }
 }
 
-// const startGame = (event) => {
-//   event.preventDefault()
-//   // $('.box').html('')
-//   // $('.box').removeClass('stay-red')
-//   // $('.box').removeClass('stay-blue')
-//   // $('h1').html('Tic-Tac-Toe')
-//   // $('#user-feedback').html('')
-//   $('.box').one('click', () => {
-//     event.preventDefault()
-//     gameModel.whoseTurn() ? gameModel.turnX(event) : gameModel.turnO(event)
-//     gameModel.gameCounterIterator()
-//   })
-//   gameModel.gameCounter = 1
-//
-//   api.createGame()
-//     .then(ui.createGameSuccess)
-//     .catch(ui.failure)
-// }
+const startGame = (event) => {
+  event.preventDefault()
+  $('.box').html('')
+  $('.box').removeClass('stay-red')
+  $('.box').removeClass('stay-blue')
+  $('h1').html('Tic-Tac-Toe')
+  $('#user-feedback').html('')
+  gameModel.gameCounter = 0
+  $('.row').on('click', '.box', gameModel.onClick)
+
+  // $('.box').one('click', () => {
+  //   event.preventDefault()
+  //   gameModel.whoseTurn() ? gameModel.turnX(event) : gameModel.turnO(event)
+  //   gameModel.gameCounterIterator()
+  // })
+  // gameModel.gameCounter = 1
+  //
+  // api.createGame()
+  //   .then(ui.createGameSuccess)
+  //   .catch(ui.failure)
+}
 
 const addHandlers = function () {
   $('.box').hover(gameModel.onMouseEnter, gameModel.onMouseLeave)
@@ -203,7 +205,7 @@ const addHandlers = function () {
   $('.row').on('click', '.box', gameModel.onClick)
 
   // $('.box').trigger('click')
-  // $('#start-game-button').on('click', gameModel.onClick)
+  $('#start-game-button').on('click', startGame)
   // $('#display-games').on('click', '.get-game-button', onGetGame)
   $('#get-games-button').on('click', onGetGames)
 }
