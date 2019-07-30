@@ -11,15 +11,15 @@ const getGames = () => {
   })
 }
 
-const getGame = (id) => {
-  return $.ajax({
-    url: config.apiUrl + `/games/${id}`,
-    method: 'GET',
-    headers: {
-      Authorization: 'Token token=' + store.user.token
-    }
-  })
-}
+// const getGame = (id) => {
+//   return $.ajax({
+//     url: config.apiUrl + `/games/${id}`,
+//     method: 'GET',
+//     headers: {
+//       Authorization: 'Token token=' + store.user.token
+//     }
+//   })
+// }
 
 const createGame = () => {
   return $.ajax({
@@ -45,7 +45,6 @@ const updateGame = (id, newMove) => {
 
 module.exports = {
   getGames,
-  getGame,
   createGame,
   updateGame
 }
