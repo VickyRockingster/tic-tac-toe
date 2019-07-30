@@ -124,6 +124,8 @@ const gameModel = {
     (store.currentGame.cells[2] === store.currentGame.cells[4] && store.currentGame.cells[4] === store.currentGame.cells[6] && store.currentGame.cells[6] === 'X')) {
       $('.row').off('click', gameModel.onClick)
       $('h1').html('Game over; X Wins!')
+      $('#start-game-button').show()
+
       // setTimeout(() => {
       //   $('.box').html('')
       //   $('.box').removeClass('stay-red')
@@ -141,6 +143,8 @@ const gameModel = {
     (store.currentGame.cells[2] === store.currentGame.cells[4] && store.currentGame.cells[4] === store.currentGame.cells[6] && store.currentGame.cells[6] === 'O')) {
       $('.row').off('click', gameModel.onClick)
       $('h1').html('Game over; O Wins!')
+      $('#start-game-button').show()
+
       // setTimeout(() => {
       //   $('.box').html('')
       //   $('.box').removeClass('stay-red')
@@ -151,6 +155,8 @@ const gameModel = {
     } else if (gameModel.gameCounter === 9) {
       $('.row').off('click', gameModel.onClick)
       $('h1').html('Game Over! It\'s a Draw!')
+      $('#start-game-button').show()
+
       // setTimeout(() => {
       //   $('.box').html('')
       //   $('.box').removeClass('stay-red')
@@ -186,17 +192,7 @@ const startGame = (event) => {
   $('#user-feedback').html('')
   gameModel.gameCounter = 0
   $('.row').on('click', '.box', gameModel.onClick)
-
-  // $('.box').one('click', () => {
-  //   event.preventDefault()
-  //   gameModel.whoseTurn() ? gameModel.turnX(event) : gameModel.turnO(event)
-  //   gameModel.gameCounterIterator()
-  // })
-  // gameModel.gameCounter = 1
-  //
-  // api.createGame()
-  //   .then(ui.createGameSuccess)
-  //   .catch(ui.failure)
+  $('#start-game-button').hide()
 }
 
 const addHandlers = function () {
