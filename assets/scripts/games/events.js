@@ -2,7 +2,7 @@ const ui = require('./ui.js')
 const api = require('./api.js')
 const store = require('../store.js')
 
-const onGetGames = (event) => {
+const onGetGames = event => {
   event.preventDefault()
 
   api.getGames()
@@ -22,6 +22,7 @@ const onGetGames = (event) => {
 //     .catch(ui.failure)
 // }
 
+// Game Object Model
 const gameModel = {
   // tracks whose turn it is by tracking how many clicks
   gameCounter: 0,
@@ -44,7 +45,7 @@ const gameModel = {
   // to see whose turn it is to turn the box blue or red
   onMouseEnter: event => {
     event.preventDefault()
-    if (!gameModel.didYouWin() && $(event.target).html() === '') {
+    if (!gameModel.didSomeoneWin() && $(event.target).html() === '') {
       gameModel.whoseTurn() ? $(event.target).addClass('turn-blue') : $(event.target).addClass('turn-red')
     }
   },
@@ -69,12 +70,12 @@ const gameModel = {
             index: gameEleIndex,
             value: gameEleValue
           },
-          over: gameModel.didYouWin()
+          over: gameModel.didSomeoneWin()
         }
       }
       api.updateGame(store.currentGame.id, newMove)
         .then(ui.updateGameSuccess)
-        .then(gameModel.didYouWin)
+        .then(gameModel.didSomeoneWin)
         .then(boolean => {
           boolean === false ? $('#user-feedback').html('Now it\'s O\'s turn!')
             : $('#user-feedback').html('')
@@ -95,12 +96,12 @@ const gameModel = {
             index: gameEleIndex,
             value: gameEleValue
           },
-          over: gameModel.didYouWin()
+          over: gameModel.didSomeoneWin()
         }
       }
       api.updateGame(store.currentGame.id, newMove)
         .then(ui.updateGameSuccess)
-        .then(gameModel.didYouWin)
+        .then(gameModel.didSomeoneWin)
         .then((boolean) => {
           boolean === false ? $('#user-feedback').html('Now it\'s X\'s turn!')
             : $('#user-feedback').html('')
@@ -112,7 +113,7 @@ const gameModel = {
   // this method checks to see if someone won after 5 clicks; will return true
   // when the game is over (someone wins or it's a draw); otherwise will return
   // false
-  didYouWin: () => {
+  didSomeoneWin: () => {
     if (gameModel.gameCounter < 5) {
       return false
     } else if ((store.currentGame.cells[0] === store.currentGame.cells[1] && store.currentGame.cells[1] === store.currentGame.cells[2] && store.currentGame.cells[2] === 'X') ||
@@ -125,7 +126,7 @@ const gameModel = {
     (store.currentGame.cells[2] === store.currentGame.cells[4] && store.currentGame.cells[4] === store.currentGame.cells[6] && store.currentGame.cells[6] === 'X')) {
       $('.row').off('click', gameModel.onClick)
       $('h1').html('Game over; X Wins!')
-      $('#start-game-button').show()
+      // $('#start-game-button').show()
       return true
     } else if ((store.currentGame.cells[0] === store.currentGame.cells[1] && store.currentGame.cells[1] === store.currentGame.cells[2] && store.currentGame.cells[2] === 'O') ||
     (store.currentGame.cells[3] === store.currentGame.cells[4] && store.currentGame.cells[4] === store.currentGame.cells[5] && store.currentGame.cells[5] === 'O') ||
@@ -137,12 +138,12 @@ const gameModel = {
     (store.currentGame.cells[2] === store.currentGame.cells[4] && store.currentGame.cells[4] === store.currentGame.cells[6] && store.currentGame.cells[6] === 'O')) {
       $('.row').off('click', gameModel.onClick)
       $('h1').html('Game over; O Wins!')
-      $('#start-game-button').show()
+      // $('#start-game-button').show()
       return true
     } else if (gameModel.gameCounter === 9) {
       $('.row').off('click', gameModel.onClick)
       $('h1').html('Game Over! It\'s a Draw!')
-      $('#start-game-button').show()
+      // $('#start-game-button').show()
       return true
     } else { return false }
   },
@@ -152,35 +153,34 @@ const gameModel = {
       api.createGame()
         .then(ui.createGameSuccess)
         .then(() => gameModel.turnX(event))
+        .then($('#start-game-button').show())
         .then(console.log('clicked at the end!'))
         .catch(ui.failure)
     } else { gameModel.takeTurns(event) }
+  },
+  // Will reset gameboard for a new game
+  startGame: event => {
+    event.preventDefault()
+    $('.box').html('')
+    $('.box').removeClass('stay-red')
+    $('.box').removeClass('stay-blue')
+    $('h1').html('Tic-Tac-Toe')
+    $('#user-feedback').html('')
+    gameModel.gameCounter = 0
+    $('.row').on('click', '.box', gameModel.onClick)
+    $('#start-game-button').hide()
   }
-}
-
-const startGame = (event) => {
-  event.preventDefault()
-  $('.box').html('')
-  $('.box').removeClass('stay-red')
-  $('.box').removeClass('stay-blue')
-  $('h1').html('Tic-Tac-Toe')
-  $('#user-feedback').html('')
-  gameModel.gameCounter = 0
-  $('.row').on('click', '.box', gameModel.onClick)
-  $('#start-game-button').hide()
 }
 
 const addHandlers = function () {
   $('.box').hover(gameModel.onMouseEnter, gameModel.onMouseLeave)
-  // $('.box').on('click', gameModel.onClick)
   $('.row').on('click', '.box', gameModel.onClick)
-
-  // $('.box').trigger('click')
-  $('#start-game-button').on('click', startGame)
+  $('#start-game-button').on('click', gameModel.startGame)
   // $('#display-games').on('click', '.get-game-button', onGetGame)
   $('#get-games-button').on('click', onGetGames)
 }
 
 module.exports = {
-  addHandlers
+  addHandlers,
+  gameModel
 }

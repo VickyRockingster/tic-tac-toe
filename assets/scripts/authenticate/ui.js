@@ -1,5 +1,5 @@
 const store = require('../store.js')
-const events = require('../games/events.js')
+const gameEvents = require('../games/events.js')
 
 const signInSuccess = function (data) {
   $('#user-feedback').html('Welcome!')
@@ -16,7 +16,7 @@ const signInSuccess = function (data) {
   $('.authentication-page-view').hide()
   $('.account-page-view').removeClass('hidden')
   $('.account-page-view').hide()
-  $('.box').off('click', events.onClick)
+  // $('.box').off('click', gameEvents.gameModel.onClick)
   setTimeout(() => {
     $('#user-feedback').html('')
   }, 3000)
@@ -30,6 +30,13 @@ const signOutSuccess = function (data) {
   $('.game-page-view').hide()
   $('.account-page-view').hide()
   $('#display-games').html('')
+  $('.box').html('')
+  $('.box').removeClass('stay-red')
+  $('.box').removeClass('stay-blue')
+  $('h1').html('Tic-Tac-Toe')
+  gameEvents.gameModel.gameCounter = 0
+  $('.row').on('click', '.box', gameEvents.gameModel.onClick)
+  $('#start-game-button').hide()
 
   setTimeout(() => {
     $('#user-feedback').html('')
