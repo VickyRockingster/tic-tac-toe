@@ -20,6 +20,7 @@ const showAccountPage = (event) => {
   $('#account-button').hide()
   $('#game-page-button').show()
   $('#user-feedback').html('')
+  $('#display-games').html('')
 }
 
 // hides the account page-view and shows the page-view to play the game

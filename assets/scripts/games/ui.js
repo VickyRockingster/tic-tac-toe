@@ -13,31 +13,25 @@ const getGamesSuccess = function (data) {
       <h3>Game No.: ${game.id}</h3>
       <div class="container">
         <div class="row">
-          <div class="box col-4" data-cell-index="0" value=${game.cells[0]}>${game.cells[0]}</div>
-          <div class="box col-4" data-cell-index="1" value=${game.cells[1]}>${game.cells[1]}</div>
-          <div class="box col-4" data-cell-index="2" value=${game.cells[2]}>${game.cells[2]}</div>
+          <div class="box col-4" data-cell-index="0">${game.cells[0]}</div>
+          <div class="box col-4" data-cell-index="1">${game.cells[1]}</div>
+          <div class="box col-4" data-cell-index="2">${game.cells[2]}</div>
         </div>
         <div class="row">
-          <div class="box col-4" data-cell-index="3" value=${game.cells[3]}>${game.cells[3]}</div>
-          <div class="box col-4" data-cell-index="4" value=${game.cells[4]}>${game.cells[4]}</div>
-          <div class="box col-4" data-cell-index="5" value=${game.cells[5]}>${game.cells[5]}</div>
+          <div class="box col-4" data-cell-index="3">${game.cells[3]}</div>
+          <div class="box col-4" data-cell-index="4">${game.cells[4]}</div>
+          <div class="box col-4" data-cell-index="5">${game.cells[5]}</div>
         </div>
         <div class="row">
-          <div class="box col-4" data-cell-index="6" value=${game.cells[6]}>${game.cells[6]}</div>
-          <div class="box col-4" data-cell-index="7" value=${game.cells[7]}>${game.cells[7]}</div>
-          <div class="box col-4" data-cell-index="8" value=${game.cells[8]}>${game.cells[8]}</div>
+          <div class="box col-4" data-cell-index="6">${game.cells[6]}</div>
+          <div class="box col-4" data-cell-index="7">${game.cells[7]}</div>
+          <div class="box col-4" data-cell-index="8">${game.cells[8]}</div>
         </div>
       </div>
     `)
+    $('.box:contains(X)').addClass('stay-red')
+    $('.box:contains(O)').addClass('stay-blue')
     $('#display-games').append(eachGame)
-    // $('.box').css('background-color', 'red')
-    // $('.box').addClass('stay-red')
-    console.log($('.box').html())
-
-    // if ($('.box').html() === 'X') {
-    // const index = $('.box').data('cell-index')
-    // $('.box').html(index, $.addClass('stay-red'))
-    // }
   })
 }
 
