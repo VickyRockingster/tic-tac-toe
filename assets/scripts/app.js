@@ -37,7 +37,7 @@ const showGamePage = (event) => {
 $(() => {
   authEvents.addHandlers()
   gameEvents.addHandlers()
-  $('#start-game-button').hide()
   $('#account-button').on('click', showAccountPage)
+  $('#start-game-button').hide()
   $('#game-page-button').on('click', showGamePage)
 })
